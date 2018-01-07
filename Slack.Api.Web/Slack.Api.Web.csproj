@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{69096D00-0747-4FF1-A5C5-C29C49E3B7A1}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{D0EDDB55-BFFD-4F1B-A386-E21CCC0A27F2}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bashi</RootNamespace>
-    <AssemblyName>Bashi</AssemblyName>
+    <RootNamespace>Slack.Api.Web</RootNamespace>
+    <AssemblyName>Slack.Api.Web</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1-beta3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -39,24 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BashiApp.cs" />
+    <Compile Include="SlackWebClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Slack.Api.Message\Slack.Api.Message.csproj">
       <Project>{C91C4B65-B7CD-4C70-99D0-E3817F5B7DCC}</Project>
       <Name>Slack.Api.Message</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Slack.Api.Rtm\Slack.Api.Rtm.csproj">
-      <Project>{1DBAC5D2-6AF9-46D7-9C84-2769A0B54DD0}</Project>
-      <Name>Slack.Api.Rtm</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Slack.Api.Web\Slack.Api.Web.csproj">
-      <Project>{D0EDDB55-BFFD-4F1B-A386-E21CCC0A27F2}</Project>
-      <Name>Slack.Api.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
