@@ -8,9 +8,9 @@ namespace Slack.Api.Rtm
 {
     public class SlackRtmClient
     {
-        private ClientWebSocket webSocket;
+        private readonly ClientWebSocket webSocket;
         private int messageId;
-        private int pingTimeout = 5000;
+        private const int PingTimeout = 5000;
 
         public SlackRtmClient()
         {
@@ -47,7 +47,7 @@ namespace Slack.Api.Rtm
             {
                 while (webSocket.State == WebSocketState.Open)
                 {
-                    await Task.Delay(pingTimeout);
+                    await Task.Delay(PingTimeout);
 
                     var buffer = Encoding.ASCII.GetBytes($"{{\"id\": \"{messageId++}\", \"type\": \"ping\"}}");
                     var message = new ArraySegment<byte>(buffer);

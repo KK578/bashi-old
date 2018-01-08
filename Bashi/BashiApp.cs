@@ -6,27 +6,32 @@ namespace Bashi
 {
     internal class BashiApp
     {
-        public static void Main(string[] args)
+        private SlackWebClient slackWebClient;
+        private SlackRtmClient slackRtmClient;
+        private string token;
+
+        public BashiApp(string token)
         {
-            var token = args[0];
-            Test(token);
-            
-            Console.WriteLine("Back in Main.");
-            Console.ReadLine();
+            this.token = token;
         }
 
-        private static async void Test(string token)
+        public void Connect()
         {
-            var webClient = new SlackWebClient();
-            var connectResponse = await webClient.RtmConnectAsync(token);
-
-            TestWebSocket(connectResponse.WebSocketUrl);
+            SetupWebClient(token);
         }
 
-        private static async void TestWebSocket(string url)
+        private async void SetupWebClient(string token)
         {
-            var rtmClient = new SlackRtmClient();
-            await rtmClient.ConnectAsync(url);
+            slackWebClient = new SlackWebClient();
+            var connectResponse = await slackWebClient.RtmConnectAsync(token);
+
+            SetupRtmClient(connectResponse.WebSocketUrl);
+        }
+
+        private async void SetupRtmClient(string url)
+        {
+            slackRtmClient = new SlackRtmClient();
+            await slackRtmClient.ConnectAsync(url);
 
             Console.WriteLine("Connected.");
         }
