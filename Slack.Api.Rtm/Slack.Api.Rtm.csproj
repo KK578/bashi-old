@@ -41,6 +41,12 @@
     <Compile Include="SlackRtmClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Slack.Api.Message\Slack.Api.Message.csproj">
+      <Project>{C91C4B65-B7CD-4C70-99D0-E3817F5B7DCC}</Project>
+      <Name>Slack.Api.Message</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.

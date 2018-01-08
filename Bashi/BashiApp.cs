@@ -8,7 +8,7 @@ namespace Bashi
     {
         private SlackWebClient slackWebClient;
         private SlackRtmClient slackRtmClient;
-        private string token;
+        private readonly string token;
 
         public BashiApp(string token)
         {
@@ -17,10 +17,10 @@ namespace Bashi
 
         public void Connect()
         {
-            SetupWebClient(token);
+            SetupWebClient();
         }
 
-        private async void SetupWebClient(string token)
+        private async void SetupWebClient()
         {
             slackWebClient = new SlackWebClient();
             var connectResponse = await slackWebClient.RtmConnectAsync(token);
