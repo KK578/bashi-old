@@ -2,7 +2,7 @@
 
 namespace Slack.Api.Message.Response.Rtm
 {
-    public class BaseRtmResponse
+    public abstract class BaseRtmResponse
     {
         [JsonProperty("type")]
         public string Type { get; set; }
