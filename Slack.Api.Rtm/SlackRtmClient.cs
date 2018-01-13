@@ -39,9 +39,22 @@ namespace Slack.Api.Rtm
                 {
                     var buffer = new byte[BufferSize];
                     var arraySegment = new ArraySegment<byte>(buffer);
-                    var result = await webSocket.ReceiveAsync(arraySegment, CancellationToken.None);
+                    await webSocket.ReceiveAsync(arraySegment, CancellationToken.None);
+                    var decodedString = encoder.GetString(buffer);
 
-                    Console.WriteLine($"[{result.Count}] {encoder.GetString(buffer)}");
+                    try
+                    {
+                        var response = SocketDecoder.Deserialize(decodedString);
+                        Console.WriteLine($"<INFO> {response}");
+                    }
+                    catch (NotImplementedException e)
+                    {
+                        Console.WriteLine($"<ERROR> {e.Message}");
+                    }
+                    finally
+                    {
+                        Console.WriteLine($"<DEBUG> {decodedString}");
+                    }
                 }
             }
         }

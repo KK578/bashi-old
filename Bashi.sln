@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slack.Api.Message", "Slack.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slack.Api.Web", "Slack.Api.Web\Slack.Api.Web.csproj", "{D0EDDB55-BFFD-4F1B-A386-E21CCC0A27F2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{59D62DAC-FEEA-4588-A8DD-77CA3D1C62F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slack.Api.Rtm.Test", "Slack.Api.Rtm.Test\Slack.Api.Rtm.Test.csproj", "{077FDE38-BDCB-4A88-8693-701927312DB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,12 @@ Global
 		{D0EDDB55-BFFD-4F1B-A386-E21CCC0A27F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0EDDB55-BFFD-4F1B-A386-E21CCC0A27F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0EDDB55-BFFD-4F1B-A386-E21CCC0A27F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{077FDE38-BDCB-4A88-8693-701927312DB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{077FDE38-BDCB-4A88-8693-701927312DB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{077FDE38-BDCB-4A88-8693-701927312DB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{077FDE38-BDCB-4A88-8693-701927312DB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{077FDE38-BDCB-4A88-8693-701927312DB6} = {59D62DAC-FEEA-4588-A8DD-77CA3D1C62F9}
 	EndGlobalSection
 EndGlobal
