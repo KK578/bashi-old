@@ -12,18 +12,23 @@ namespace Slack.Api.Rtm
         private const int PingTimeout = 5000;
         private const int BufferSize = 1024;
         
-        private readonly ClientWebSocket webSocket;
+        private readonly ClientWebSocket clientWebSocket;
+        private readonly UTF8Encoding encoder;
+        private readonly ISocketDecoder socketDecoder;
+        
         private int messageId;
-        private readonly UTF8Encoding encoder = new UTF8Encoding();
 
-        public SlackRtmClient()
+        public SlackRtmClient(ClientWebSocket clientWebSocket, ISocketDecoder socketDecoder)
         {
-            webSocket = new ClientWebSocket();
+            this.clientWebSocket = clientWebSocket;
+            this.socketDecoder = socketDecoder;
+
+            encoder = new UTF8Encoding();
         }
 
         public async Task ConnectAsync(string url)
         {
-            await webSocket.ConnectAsync(new Uri(url), CancellationToken.None);
+            await clientWebSocket.ConnectAsync(new Uri(url), CancellationToken.None);
 
             SetupReceiver();
             SetupPing();
@@ -35,16 +40,16 @@ namespace Slack.Api.Rtm
 
             async void Setup()
             {
-                while (webSocket.State == WebSocketState.Open)
+                while (clientWebSocket.State == WebSocketState.Open)
                 {
                     var buffer = new byte[BufferSize];
                     var arraySegment = new ArraySegment<byte>(buffer);
-                    await webSocket.ReceiveAsync(arraySegment, CancellationToken.None);
+                    await clientWebSocket.ReceiveAsync(arraySegment, CancellationToken.None);
                     var decodedString = encoder.GetString(buffer);
 
                     try
                     {
-                        var response = SocketDecoder.Deserialize(decodedString);
+                        var response = socketDecoder.Deserialize(decodedString);
                         Console.WriteLine($"<INFO> {response}");
                     }
                     catch (NotImplementedException e)
@@ -65,13 +70,13 @@ namespace Slack.Api.Rtm
             
             async Task Setup()
             {
-                while (webSocket.State == WebSocketState.Open)
+                while (clientWebSocket.State == WebSocketState.Open)
                 {
                     var pingRequest = new PingRequest(messageId++);
                     var buffer = Encoding.ASCII.GetBytes(pingRequest.ToJsonString());
                     var message = new ArraySegment<byte>(buffer);
 
-                    await webSocket.SendAsync(message, WebSocketMessageType.Text, true, CancellationToken.None);
+                    await clientWebSocket.SendAsync(message, WebSocketMessageType.Text, true, CancellationToken.None);
                     await Task.Delay(PingTimeout);
                 }
             }

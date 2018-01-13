@@ -4,9 +4,9 @@ using Slack.Api.Message.Response.Rtm;
 
 namespace Slack.Api.Rtm
 {
-    public static class RtmResponseFactory
+    public class RtmResponseFactory : IRtmResponseFactory
     {
-        public static BaseRtmResponse CreateResponse(string json)
+        public BaseRtmResponse CreateResponse(string json)
         {
             dynamic jsonObject = JsonConvert.DeserializeObject(json);
             string type = jsonObject.type;

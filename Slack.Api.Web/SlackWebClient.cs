@@ -8,11 +8,11 @@ namespace Slack.Api.Web
 {
     public class SlackWebClient
     {
-        private readonly HttpClient client;
+        private readonly HttpClient httpClient;
 
-        public SlackWebClient()
+        public SlackWebClient(HttpClient httpClient)
         {
-            client = new HttpClient();
+            this.httpClient = httpClient;
         }
 
         public async Task<RtmConnectResponse> RtmConnectAsync(string token)
@@ -26,7 +26,7 @@ namespace Slack.Api.Web
 
             var content = new FormUrlEncodedContent(values);
 
-            var response = await client.PostAsync(url, content);
+            var response = await httpClient.PostAsync(url, content);
             var responseContent = await response.Content.ReadAsStringAsync();
             var connectResponse = JsonConvert.DeserializeObject<RtmConnectResponse>(responseContent);
 

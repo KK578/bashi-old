@@ -7,7 +7,8 @@ namespace Bashi
         public static void Main(string[] args)
         {
             var token = args[0];
-            var bashi = new BashiApp(token);
+            var container = BashiContainer.Build();
+            var bashi = new BashiApp(token, container);
 
             bashi.Connect();
 

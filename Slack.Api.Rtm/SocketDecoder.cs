@@ -2,11 +2,18 @@
 
 namespace Slack.Api.Rtm
 {
-    public static class SocketDecoder
+    public class SocketDecoder : ISocketDecoder
     {
-        public static WebSocketResponse Deserialize(string json)
+        private readonly IRtmResponseFactory factory;
+
+        public SocketDecoder(IRtmResponseFactory factory)
         {
-            var response = RtmResponseFactory.CreateResponse(json);
+            this.factory = factory;
+        }
+        
+        public WebSocketResponse Deserialize(string json)
+        {
+            var response = factory.CreateResponse(json);
 
             return new WebSocketResponse(response.Type, response);
         } 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Autofac;
 using Slack.Api.Rtm;
 using Slack.Api.Web;
 
@@ -9,10 +10,12 @@ namespace Bashi
         private SlackWebClient slackWebClient;
         private SlackRtmClient slackRtmClient;
         private readonly string token;
+        private readonly IContainer container;
 
-        public BashiApp(string token)
+        public BashiApp(string token, IContainer container)
         {
             this.token = token;
+            this.container = container;
         }
 
         public void Connect()
@@ -22,7 +25,7 @@ namespace Bashi
 
         private async void SetupWebClient()
         {
-            slackWebClient = new SlackWebClient();
+            slackWebClient = container.Resolve<SlackWebClient>();
             var connectResponse = await slackWebClient.RtmConnectAsync(token);
 
             SetupRtmClient(connectResponse.WebSocketUrl);
@@ -30,7 +33,7 @@ namespace Bashi
 
         private async void SetupRtmClient(string url)
         {
-            slackRtmClient = new SlackRtmClient();
+            slackRtmClient = container.Resolve<SlackRtmClient>();
             await slackRtmClient.ConnectAsync(url);
 
             Console.WriteLine("Connected.");

@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRtmResponseFactory.cs" />
+    <Compile Include="ISocketDecoder.cs" />
     <Compile Include="RtmResponseFactory.cs" />
     <Compile Include="SlackRtmClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
