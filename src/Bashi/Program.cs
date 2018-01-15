@@ -1,4 +1,5 @@
 ﻿using System;
+using Autofac;
 
 namespace Bashi
 {
@@ -7,10 +8,11 @@ namespace Bashi
         public static void Main(string[] args)
         {
             var token = args[0];
+            
             var container = BashiContainer.Build();
-            var bashi = new BashiApp(token, container);
+            var bashi = container.Resolve<BashiApp>();
 
-            bashi.Connect();
+            bashi.Connect(token);
 
             Console.ReadLine();
         }
