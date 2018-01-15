@@ -4,7 +4,12 @@ var target = Argument("target", "Default");
 var solution = "./Bashi.sln";
 
 Task("Default")
+    .IsDependentOn("Build")
     .IsDependentOn("Test");
+
+Task("Rebuild")
+    .IsDependentOn("Clean")
+    .IsDependentOn("Default");
 
 Task("NuGet:Restore")
     .Does(() =>
@@ -17,10 +22,11 @@ Task("Build")
     .Does(() =>
     {
         var settings = new MSBuildSettings { Verbosity = Verbosity.Minimal };
+
         MSBuild(solution, settings);
     });
 
-Task("TestOnly")
+Task("Test")
     .Does(() => 
     {
         var assemblies = GetFiles("./test/*/bin/Debug/*.Test.dll");
@@ -28,10 +34,6 @@ Task("TestOnly")
 
         NUnit3(assemblies, settings);
     });
-
-Task("Test")
-    .IsDependentOn("Build")
-    .IsDependentOn("TestOnly");
 
 Task("Clean")
     .Does(() =>
@@ -49,9 +51,5 @@ Task("Clean")
         CleanAndNotify("./test/**/bin/Debug");
         CleanAndNotify("./test/**/obj/Debug");
     });
-
-Task("Rebuild")
-    .IsDependentOn("Clean")
-    .IsDependentOn("Build");
 
 RunTarget(target);
