@@ -1,7 +1,6 @@
 sudo: false
 dist: trusty
-language: c#
-solution: "Bashi.sln"
+language: csharp
 
 notifications:
   slack:
