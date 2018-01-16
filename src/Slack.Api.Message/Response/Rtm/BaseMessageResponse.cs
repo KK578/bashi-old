@@ -12,7 +12,7 @@ namespace Slack.Api.Message.Response.Rtm
 
         [JsonProperty("team")]
         public string Team { get; set; }
-        
+
         [JsonProperty("text")]
         public string Text { get; set; }
 

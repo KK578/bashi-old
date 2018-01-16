@@ -6,7 +6,7 @@ namespace Slack.Api.Message.Response.Web.Rtm
     {
         [JsonProperty("ok")]
         public bool Ok { get; set; }
-        
+
         [JsonProperty("url")]
         public string WebSocketUrl { get; set; }
     }

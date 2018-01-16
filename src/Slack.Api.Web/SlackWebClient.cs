@@ -19,10 +19,7 @@ namespace Slack.Api.Web
         {
             const string url = "https://slack.com/api/rtm.connect";
 
-            var values = new Dictionary<string, string>
-            {
-                {"token", token}
-            };
+            var values = new Dictionary<string, string> { { "token", token } };
 
             var content = new FormUrlEncodedContent(values);
 

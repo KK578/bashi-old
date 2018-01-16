@@ -41,7 +41,7 @@ namespace Slack.Api.Rtm
                     return CreateResponse<MessageResponse>(json);
             }
         }
-        
+
         private static T CreateResponse<T>(string json) => JsonConvert.DeserializeObject<T>(json);
     }
 }

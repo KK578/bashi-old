@@ -10,12 +10,12 @@ namespace Slack.Api.Rtm
         {
             this.factory = factory;
         }
-        
+
         public WebSocketResponse Deserialize(string json)
         {
             var response = factory.CreateResponse(json);
 
             return new WebSocketResponse(response.Type, response);
-        } 
+        }
     }
 }

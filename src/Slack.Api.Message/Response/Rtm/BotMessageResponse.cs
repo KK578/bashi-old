@@ -6,7 +6,7 @@ namespace Slack.Api.Message.Response.Rtm
     {
         [JsonProperty("bot_id")]
         public string BotId { get; set; }
-        
+
         [JsonProperty("username")]
         public string Username { get; set; }
     }

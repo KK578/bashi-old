@@ -6,7 +6,7 @@ namespace Slack.Api.Message.Response.Rtm
     {
         [JsonProperty("channel")]
         public string Channel { get; set; }
-        
+
         [JsonProperty("user")]
         public string User { get; set; }
     }

@@ -11,11 +11,11 @@ namespace Slack.Api.Rtm
     {
         private const int PingTimeout = 5000;
         private const int BufferSize = 1024;
-        
+
         private readonly ClientWebSocket clientWebSocket;
         private readonly UTF8Encoding encoder;
         private readonly ISocketDecoder socketDecoder;
-        
+
         private int messageId;
 
         public SlackRtmClient(ClientWebSocket clientWebSocket, ISocketDecoder socketDecoder)
@@ -67,7 +67,7 @@ namespace Slack.Api.Rtm
         private void SetupPing()
         {
             Task.Factory.StartNew(Setup);
-            
+
             async Task Setup()
             {
                 while (clientWebSocket.State == WebSocketState.Open)
