@@ -2,6 +2,6 @@
 {
     public interface IBashiConnectionManager
     {
-        void Connect(string token);
+        void Connect(IConnectionParams details);
     }
 }

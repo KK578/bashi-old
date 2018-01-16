@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Bashi.Core;
+using Bashi.Slack;
 
 namespace Bashi
 {
@@ -15,7 +16,7 @@ namespace Bashi
 
         public void Connect(string token)
         {
-            bashiConnectionManagers.ForEach(manager => manager.Connect(token));
+            bashiConnectionManagers.ForEach(manager => manager.Connect(new SlackConnectionParams(token)));
         }
     }
 }

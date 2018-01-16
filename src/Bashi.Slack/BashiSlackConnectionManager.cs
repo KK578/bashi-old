@@ -16,9 +16,12 @@ namespace Bashi.Slack
             this.slackWebClient = slackWebClient;
         }
 
-        public void Connect(string token)
+        public void Connect(IConnectionParams details)
         {
-            SetupRtmClient(token);
+            if (details is SlackConnectionParams slackDetails)
+            {
+                SetupRtmClient(slackDetails.BotToken);
+            }
         }
 
         private async void SetupRtmClient(string token)
