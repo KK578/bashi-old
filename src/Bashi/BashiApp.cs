@@ -1,19 +1,20 @@
-﻿using Bashi.Slack;
+﻿using Bashi.Core;
+using Bashi.Slack;
 
 namespace Bashi
 {
     internal class BashiApp
     {
-        private readonly BashiSlackConnectionManager bashiSlackConnectionManager;
+        private readonly IBashiConnectionManager bashiConnectionManager;
 
-        public BashiApp(BashiSlackConnectionManager bashiSlackConnectionManager)
+        public BashiApp(IBashiConnectionManager bashiConnectionManager)
         {
-            this.bashiSlackConnectionManager = bashiSlackConnectionManager;
+            this.bashiConnectionManager = bashiConnectionManager;
         }
 
         public void Connect(string token)
         {
-            bashiSlackConnectionManager.Connect(token);
+            bashiConnectionManager.Connect(token);
         }
     }
 }

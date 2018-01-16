@@ -1,10 +1,11 @@
 ﻿using System;
+using Bashi.Core;
 using Slack.Api.Rtm;
 using Slack.Api.Web;
 
 namespace Bashi.Slack
 {
-    public class BashiSlackConnectionManager
+    public class BashiSlackConnectionManager : IBashiConnectionManager
     {
         private readonly SlackWebClient slackWebClient;
         private readonly SlackRtmClient slackRtmClient;

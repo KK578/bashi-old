@@ -28,7 +28,7 @@ namespace Bashi
             builder.RegisterType<SlackWebClient>().SingleInstance().AsSelf();
 
             // Bashi.Slack
-            builder.RegisterType<BashiSlackConnectionManager>().AsSelf();
+            builder.RegisterType<BashiSlackConnectionManager>().AsImplementedInterfaces();
 
             // Bashi
             builder.RegisterType<BashiApp>().AsSelf();
