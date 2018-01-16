@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Net.WebSockets;
 using Autofac;
+using Bashi.Slack;
 using Slack.Api.Rtm;
 using Slack.Api.Web;
 
@@ -25,6 +26,9 @@ namespace Bashi
 
             // Slack.Api.Web
             builder.RegisterType<SlackWebClient>().SingleInstance().AsSelf();
+
+            // Bashi.Slack
+            builder.RegisterType<BashiSlackConnectionManager>().AsSelf();
 
             // Bashi
             builder.RegisterType<BashiApp>().AsSelf();

@@ -51,6 +51,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bashi.Slack\Bashi.Slack.csproj">
+      <Project>{A1DFF872-8384-4E1A-A8A5-5A2FE00886AC}</Project>
+      <Name>Bashi.Slack</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Slack.Api.Message\Slack.Api.Message.csproj">
       <Project>{C91C4B65-B7CD-4C70-99D0-E3817F5B7DCC}</Project>
       <Name>Slack.Api.Message</Name>
