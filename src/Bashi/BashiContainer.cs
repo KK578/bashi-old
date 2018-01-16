@@ -31,9 +31,19 @@ namespace Bashi
             builder.RegisterType<BashiSlackConnectionManager>().SingleInstance().AsImplementedInterfaces();
 
             // Bashi
+            builder.RegisterType<BashiConnectionParamsFactory>().SingleInstance().AsSelf();
             builder.RegisterType<BashiApp>().AsSelf();
 
+            RegisterEnvironment(builder);
+
             return builder.Build();
+        }
+
+        private static void RegisterEnvironment(ContainerBuilder builder)
+        {
+            var token = "To be read from Environment";
+            var slackConnectionParams = new SlackConnectionParams(token);
+            builder.RegisterInstance(slackConnectionParams).SingleInstance().AsSelf();
         }
     }
 }

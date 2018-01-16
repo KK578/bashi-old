@@ -7,12 +7,10 @@ namespace Bashi
     {
         public static void Main(string[] args)
         {
-            var token = args[0];
-
             var container = BashiContainer.Build();
             var bashi = container.Resolve<BashiApp>();
 
-            bashi.Connect(token);
+            bashi.Connect();
 
             Console.ReadLine();
         }

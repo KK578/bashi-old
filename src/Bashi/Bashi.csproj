@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BashiApp.cs" />
+    <Compile Include="BashiConnectionParamsFactory.cs" />
     <Compile Include="BashiContainer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
