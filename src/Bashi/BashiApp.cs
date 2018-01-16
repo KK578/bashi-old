@@ -1,20 +1,21 @@
-﻿using Bashi.Core;
-using Bashi.Slack;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Bashi.Core;
 
 namespace Bashi
 {
     internal class BashiApp
     {
-        private readonly IBashiConnectionManager bashiConnectionManager;
+        private readonly List<IBashiConnectionManager> bashiConnectionManagers;
 
-        public BashiApp(IBashiConnectionManager bashiConnectionManager)
+        public BashiApp(IEnumerable<IBashiConnectionManager> bashiConnectionManagers)
         {
-            this.bashiConnectionManager = bashiConnectionManager;
+            this.bashiConnectionManagers = bashiConnectionManagers.ToList();
         }
 
         public void Connect(string token)
         {
-            bashiConnectionManager.Connect(token);
+            bashiConnectionManagers.ForEach(manager => manager.Connect(token));
         }
     }
 }
