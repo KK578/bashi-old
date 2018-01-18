@@ -8,12 +8,17 @@ using Slack.Api.Web;
 
 namespace Bashi
 {
-    public static class BashiContainer
+    public class BashiContainer
     {
-        public static IContainer Build()
-        {
-            var builder = new ContainerBuilder();
+        private readonly ContainerBuilder builder;
 
+        public BashiContainer()
+        {
+            builder = new ContainerBuilder();
+        }
+
+        public IContainer Build()
+        {
             // System.Net.Http
             builder.RegisterType<HttpClient>().SingleInstance().AsSelf();
 
@@ -35,16 +40,15 @@ namespace Bashi
             builder.RegisterType<ConnectionParamsFactory>().SingleInstance().AsSelf();
             builder.RegisterType<BashiApp>().AsSelf();
 
-            RegisterEnvironment(builder);
-
             return builder.Build();
         }
 
-        private static void RegisterEnvironment(ContainerBuilder builder)
+        public BashiContainer RegisterEnvironment(string token)
         {
-            var token = "xoxb-265000466978-zSHI1MduqerLwbqTROTEoEW3";
             var slackConnectionParams = new SlackConnectionParams(token);
             builder.RegisterInstance(slackConnectionParams).SingleInstance().AsSelf();
+
+            return this;
         }
     }
 }

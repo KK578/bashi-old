@@ -7,7 +7,9 @@ namespace Bashi
     {
         public static void Main(string[] args)
         {
-            var container = BashiContainer.Build();
+            var token = args[0];
+
+            var container = new BashiContainer().RegisterEnvironment(token).Build();
             var bashi = container.Resolve<BashiApp>();
 
             bashi.Connect();

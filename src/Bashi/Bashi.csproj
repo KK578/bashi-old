@@ -55,10 +55,6 @@
       <Project>{E55231AF-4733-4D07-9B38-1851504E2991}</Project>
       <Name>Bashi.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Bashi.Interfaces\Bashi.Interfaces.csproj">
-      <Project>{A24DADF8-04D7-44D3-8501-E193A6D86012}</Project>
-      <Name>Bashi.Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Bashi.Interface\Bashi.Interface.csproj">
       <Project>{370AE2E7-57E5-42F1-A967-275BBAB8CDEE}</Project>
       <Name>Bashi.Interface</Name>
@@ -92,7 +88,7 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
          Other similar extension points exist, see Microsoft.Common.targets.
     <Target Name="BeforeBuild">
     </Target>

@@ -30,6 +30,12 @@ namespace Bashi.Slack.Connection
         private async void SetupRtmClient(string token)
         {
             var connectResponse = await slackWebClient.RtmConnectAsync(token);
+
+            if (string.IsNullOrEmpty(connectResponse.WebSocketUrl))
+            {
+                throw new Exception("No Websocket Url from RtmConnect.");
+            }
+
             await slackRtmClient.ConnectAsync(connectResponse.WebSocketUrl);
 
             Console.WriteLine("Connected.");
