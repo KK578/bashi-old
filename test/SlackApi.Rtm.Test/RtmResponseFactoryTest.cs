@@ -2,6 +2,7 @@
 using Autofac.Extras.Moq;
 using NUnit.Framework;
 using SlackApi.Core.Data.Message.Rtm.Response.Rtm;
+using SlackApi.Core.Factory.Message;
 
 namespace SlackApi.Rtm.Test
 {

@@ -3,7 +3,6 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using SlackApi.Core.Data.Message.Rtm.Request;
 using SlackApi.Core.Interface.Rtm;
 
 namespace SlackApi.Rtm
@@ -14,15 +13,16 @@ namespace SlackApi.Rtm
         private const int BufferSize = 1024;
 
         private readonly ClientWebSocket clientWebSocket;
-        private readonly UTF8Encoding encoder;
+        private readonly IRtmRequestFactory rtmRequestFactory;
         private readonly IRtmResponseFactory rtmResponseFactory;
-
-        private int messageId;
+        private readonly UTF8Encoding encoder;
 
         public SlackRtmClient(ClientWebSocket clientWebSocket,
+                              IRtmRequestFactory rtmRequestFactory,
                               IRtmResponseFactory rtmResponseFactory)
         {
             this.clientWebSocket = clientWebSocket;
+            this.rtmRequestFactory = rtmRequestFactory;
             this.rtmResponseFactory = rtmResponseFactory;
 
             encoder = new UTF8Encoding();
@@ -44,10 +44,7 @@ namespace SlackApi.Rtm
             {
                 while (clientWebSocket.State == WebSocketState.Open)
                 {
-                    var buffer = new byte[BufferSize];
-                    var arraySegment = new ArraySegment<byte>(buffer);
-                    await clientWebSocket.ReceiveAsync(arraySegment, CancellationToken.None);
-                    var json = encoder.GetString(buffer);
+                    var json = await SendRequest();
 
                     try
                     {
@@ -64,6 +61,16 @@ namespace SlackApi.Rtm
                     }
                 }
             }
+
+            async Task<string> SendRequest()
+            {
+                var buffer = new byte[BufferSize];
+                var arraySegment = new ArraySegment<byte>(buffer);
+                await clientWebSocket.ReceiveAsync(arraySegment, CancellationToken.None);
+                var json = encoder.GetString(buffer);
+
+                return json;
+            }
         }
 
         private void SetupPing()
@@ -74,13 +81,18 @@ namespace SlackApi.Rtm
             {
                 while (clientWebSocket.State == WebSocketState.Open)
                 {
-                    var pingRequest = new PingRequest(messageId++);
-                    var buffer = Encoding.ASCII.GetBytes(pingRequest.ToJsonString());
-                    var message = new ArraySegment<byte>(buffer);
+                    await SendRequest();
 
-                    await clientWebSocket.SendAsync(message, WebSocketMessageType.Text, true, CancellationToken.None);
                     await Task.Delay(PingTimeout);
                 }
+            }
+
+            async Task SendRequest()
+            {
+                var pingRequest = rtmRequestFactory.CreatePingRequest();
+                var buffer = Encoding.ASCII.GetBytes(pingRequest.ToJsonString());
+                var message = new ArraySegment<byte>(buffer);
+                await clientWebSocket.SendAsync(message, WebSocketMessageType.Text, true, CancellationToken.None);
             }
         }
     }
