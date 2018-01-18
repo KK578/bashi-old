@@ -1,16 +1,16 @@
 ﻿using System;
 using Bashi.Interface.Connection;
-using Slack.Api.Rtm;
-using Slack.Api.Web;
+using SlackApi.Core.Interface.Rtm;
+using SlackApi.Core.Interface.Web;
 
 namespace Bashi.Slack.Connection
 {
     public class SlackConnectionManager : IConnectionManager
     {
-        private readonly SlackWebClient slackWebClient;
-        private readonly SlackRtmClient slackRtmClient;
+        private readonly ISlackWebClient slackWebClient;
+        private readonly ISlackRtmClient slackRtmClient;
 
-        public SlackConnectionManager(SlackRtmClient slackRtmClient, SlackWebClient slackWebClient)
+        public SlackConnectionManager(ISlackRtmClient slackRtmClient, ISlackWebClient slackWebClient)
         {
             this.slackRtmClient = slackRtmClient;
             this.slackWebClient = slackWebClient;

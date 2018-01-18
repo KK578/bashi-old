@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Bashi.Core.Connection;
 using Bashi.Interface.Connection;
