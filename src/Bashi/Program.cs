@@ -9,10 +9,10 @@ namespace Bashi
         {
             var token = args[0];
 
-            var container = BashiContainer.Build();
+            var container = new BashiContainer().RegisterEnvironment(token).Build();
             var bashi = container.Resolve<BashiApp>();
 
-            bashi.Connect(token);
+            bashi.Connect();
 
             Console.ReadLine();
         }
