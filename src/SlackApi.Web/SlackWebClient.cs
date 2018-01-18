@@ -3,10 +3,11 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SlackApi.Core.Data.Message.Web.Response.Rtm;
+using SlackApi.Core.Interface.Web;
 
 namespace SlackApi.Web
 {
-    public class SlackWebClient
+    public class SlackWebClient : ISlackWebClient
     {
         private readonly HttpClient httpClient;
 

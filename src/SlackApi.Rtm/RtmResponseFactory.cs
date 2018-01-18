@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using SlackApi.Core.Data.Message.Rtm.Response.Rtm;
 using SlackApi.Core.Interface.Rtm;

@@ -53,12 +53,12 @@
     <Compile Include="Data\Message\Rtm\Response\Rtm\WebSocketResponse.cs" />
     <Compile Include="Data\Message\Web\Response\Rtm\RtmConnectResponse.cs" />
     <Compile Include="Interface\Rtm\IRtmResponseFactory.cs" />
-    <Compile Include="Interface\Rtm\ISocketDecoder.cs" />
+    <Compile Include="Interface\Rtm\ISlackRtmClient.cs" />
+    <Compile Include="Interface\Web\ISlackWebClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data" />
-    <Folder Include="Interface" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

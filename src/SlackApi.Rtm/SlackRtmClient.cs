@@ -8,24 +8,21 @@ using SlackApi.Core.Interface.Rtm;
 
 namespace SlackApi.Rtm
 {
-    public class SlackRtmClient
+    public class SlackRtmClient : ISlackRtmClient
     {
         private const int PingTimeout = 5000;
         private const int BufferSize = 1024;
 
         private readonly ClientWebSocket clientWebSocket;
         private readonly UTF8Encoding encoder;
-        private readonly ISocketDecoder socketDecoder;
         private readonly IRtmResponseFactory rtmResponseFactory;
 
         private int messageId;
 
         public SlackRtmClient(ClientWebSocket clientWebSocket,
-                              ISocketDecoder socketDecoder,
                               IRtmResponseFactory rtmResponseFactory)
         {
             this.clientWebSocket = clientWebSocket;
-            this.socketDecoder = socketDecoder;
             this.rtmResponseFactory = rtmResponseFactory;
 
             encoder = new UTF8Encoding();

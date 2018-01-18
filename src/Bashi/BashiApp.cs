@@ -1,15 +1,15 @@
 ﻿using System;
-using SlackApi.Rtm;
-using SlackApi.Web;
+using SlackApi.Core.Interface.Rtm;
+using SlackApi.Core.Interface.Web;
 
 namespace Bashi
 {
     internal class BashiApp
     {
-        private readonly SlackWebClient slackWebClient;
-        private readonly SlackRtmClient slackRtmClient;
+        private readonly ISlackWebClient slackWebClient;
+        private readonly ISlackRtmClient slackRtmClient;
 
-        public BashiApp(SlackRtmClient slackRtmClient, SlackWebClient slackWebClient)
+        public BashiApp(ISlackRtmClient slackRtmClient, ISlackWebClient slackWebClient)
         {
             this.slackRtmClient = slackRtmClient;
             this.slackWebClient = slackWebClient;

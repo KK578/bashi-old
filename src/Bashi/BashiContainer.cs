@@ -18,16 +18,15 @@ namespace Bashi
             // System.Net.WebSockets
             builder.RegisterType<ClientWebSocket>().AsSelf();
 
-            // Slack.Api.Rtm
-            builder.RegisterType<SocketDecoder>().SingleInstance().AsImplementedInterfaces();
+            // SlackApi.Rtm
             builder.RegisterType<RtmResponseFactory>().SingleInstance().AsImplementedInterfaces();
-            builder.RegisterType<SlackRtmClient>().SingleInstance().AsSelf();
+            builder.RegisterType<SlackRtmClient>().SingleInstance().AsImplementedInterfaces();
 
-            // Slack.Api.Web
-            builder.RegisterType<SlackWebClient>().SingleInstance().AsSelf();
+            // SlackApi.Web
+            builder.RegisterType<SlackWebClient>().SingleInstance().AsImplementedInterfaces();
 
             // Bashi
-            builder.RegisterType<BashiApp>().AsSelf();
+            builder.RegisterType<BashiApp>().SingleInstance().AsSelf();
 
             return builder.Build();
         }

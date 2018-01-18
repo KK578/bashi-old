@@ -2,9 +2,8 @@
 using Autofac.Extras.Moq;
 using NUnit.Framework;
 using SlackApi.Core.Data.Message.Rtm.Response.Rtm;
-using SlackApi.Rtm;
 
-namespace Slack.Api.Rtm.Test
+namespace SlackApi.Rtm.Test
 {
     [TestFixture]
     public class RtmResponseFactoryTest
