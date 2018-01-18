@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E55231AF-4733-4D07-9B38-1851504E2991}</ProjectGuid>
+    <ProjectGuid>{370AE2E7-57E5-42F1-A967-275BBAB8CDEE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bashi.Core</RootNamespace>
-    <AssemblyName>Bashi.Core</AssemblyName>
+    <RootNamespace>Bashi.Interface</RootNamespace>
+    <AssemblyName>Bashi.Interface</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -38,22 +38,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connection\ConnectionParamsFactory.cs" />
+    <Compile Include="Connection\IConnectionManager.cs" />
+    <Compile Include="Connection\IConnectionParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Bashi.Interfaces\Bashi.Interfaces.csproj">
-      <Project>{A24DADF8-04D7-44D3-8501-E193A6D86012}</Project>
-      <Name>Bashi.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bashi.Interface\Bashi.Interface.csproj">
-      <Project>{370AE2E7-57E5-42F1-A967-275BBAB8CDEE}</Project>
-      <Name>Bashi.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bashi.Slack\Bashi.Slack.csproj">
-      <Project>{A1DFF872-8384-4E1A-A8A5-5A2FE00886AC}</Project>
-      <Name>Bashi.Slack</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

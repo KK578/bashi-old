@@ -1,16 +1,16 @@
 ﻿using System;
-using Bashi.Core;
+using Bashi.Interface.Connection;
 using Slack.Api.Rtm;
 using Slack.Api.Web;
 
-namespace Bashi.Slack
+namespace Bashi.Slack.Connection
 {
-    public class BashiSlackConnectionManager : IBashiConnectionManager
+    public class SlackConnectionManager : IConnectionManager
     {
         private readonly SlackWebClient slackWebClient;
         private readonly SlackRtmClient slackRtmClient;
 
-        public BashiSlackConnectionManager(SlackRtmClient slackRtmClient, SlackWebClient slackWebClient)
+        public SlackConnectionManager(SlackRtmClient slackRtmClient, SlackWebClient slackWebClient)
         {
             this.slackRtmClient = slackRtmClient;
             this.slackWebClient = slackWebClient;
@@ -18,10 +18,13 @@ namespace Bashi.Slack
 
         public void Connect(IConnectionParams details)
         {
-            if (details is SlackConnectionParams slackDetails)
+            if (!(details is SlackConnectionParams slackDetails))
             {
-                SetupRtmClient(slackDetails.BotToken);
+                throw new ArgumentException($"Connection Params was not ${nameof(SlackConnectionParams)}",
+                                            nameof(details));
             }
+
+            SetupRtmClient(slackDetails.BotToken);
         }
 
         private async void SetupRtmClient(string token)

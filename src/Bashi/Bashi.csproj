@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BashiApp.cs" />
-    <Compile Include="BashiConnectionParamsFactory.cs" />
     <Compile Include="BashiContainer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,6 +54,14 @@
     <ProjectReference Include="..\Bashi.Core\Bashi.Core.csproj">
       <Project>{E55231AF-4733-4D07-9B38-1851504E2991}</Project>
       <Name>Bashi.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bashi.Interfaces\Bashi.Interfaces.csproj">
+      <Project>{A24DADF8-04D7-44D3-8501-E193A6D86012}</Project>
+      <Name>Bashi.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bashi.Interface\Bashi.Interface.csproj">
+      <Project>{370AE2E7-57E5-42F1-A967-275BBAB8CDEE}</Project>
+      <Name>Bashi.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\Bashi.Slack\Bashi.Slack.csproj">
       <Project>{A1DFF872-8384-4E1A-A8A5-5A2FE00886AC}</Project>

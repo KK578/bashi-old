@@ -1,4 +1,4 @@
-﻿namespace Bashi.Core
+﻿namespace Bashi.Interface.Connection
 {
     public interface IConnectionParams { }
 }

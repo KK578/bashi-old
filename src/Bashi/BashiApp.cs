@@ -1,26 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Bashi.Core;
+using Bashi.Core.Connection;
+using Bashi.Interface.Connection;
 
 namespace Bashi
 {
     internal class BashiApp
     {
-        private readonly List<IBashiConnectionManager> bashiConnectionManagers;
-        private readonly BashiConnectionParamsFactory bashiConnectionParamsFactory;
+        private readonly List<IConnectionManager> connectionManagers;
+        private readonly ConnectionParamsFactory connectionParamsFactory;
 
-        public BashiApp(IEnumerable<IBashiConnectionManager> bashiConnectionManagers,
-                        BashiConnectionParamsFactory bashiConnectionParamsFactory)
+        public BashiApp(IEnumerable<IConnectionManager> connectionManagers,
+                        ConnectionParamsFactory connectionParamsFactory)
         {
-            this.bashiConnectionParamsFactory = bashiConnectionParamsFactory;
-            this.bashiConnectionManagers = bashiConnectionManagers.ToList();
+            this.connectionParamsFactory = connectionParamsFactory;
+            this.connectionManagers = connectionManagers.ToList();
         }
 
         public void Connect()
         {
-            bashiConnectionManagers.ForEach(manager =>
+            connectionManagers.ForEach(manager =>
                                             {
-                                                var details = bashiConnectionParamsFactory.GetParams(manager);
+                                                var details = connectionParamsFactory.GetParams(manager);
                                                 manager.Connect(details);
                                             });
         }

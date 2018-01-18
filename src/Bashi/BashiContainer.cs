@@ -1,7 +1,8 @@
 ﻿using System.Net.Http;
 using System.Net.WebSockets;
 using Autofac;
-using Bashi.Slack;
+using Bashi.Core.Connection;
+using Bashi.Slack.Connection;
 using Slack.Api.Rtm;
 using Slack.Api.Web;
 
@@ -28,10 +29,10 @@ namespace Bashi
             builder.RegisterType<SlackWebClient>().SingleInstance().AsSelf();
 
             // Bashi.Slack
-            builder.RegisterType<BashiSlackConnectionManager>().SingleInstance().AsImplementedInterfaces();
+            builder.RegisterType<SlackConnectionManager>().SingleInstance().AsImplementedInterfaces();
 
             // Bashi
-            builder.RegisterType<BashiConnectionParamsFactory>().SingleInstance().AsSelf();
+            builder.RegisterType<ConnectionParamsFactory>().SingleInstance().AsSelf();
             builder.RegisterType<BashiApp>().AsSelf();
 
             RegisterEnvironment(builder);
@@ -41,7 +42,7 @@ namespace Bashi
 
         private static void RegisterEnvironment(ContainerBuilder builder)
         {
-            var token = "To be read from Environment";
+            var token = "xoxb-265000466978-zSHI1MduqerLwbqTROTEoEW3";
             var slackConnectionParams = new SlackConnectionParams(token);
             builder.RegisterInstance(slackConnectionParams).SingleInstance().AsSelf();
         }

@@ -1,6 +1,6 @@
-﻿using Bashi.Core;
+﻿using Bashi.Interface.Connection;
 
-namespace Bashi.Slack
+namespace Bashi.Slack.Connection
 {
     public class SlackConnectionParams : IConnectionParams
     {
