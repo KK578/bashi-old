@@ -1,6 +1,6 @@
 ﻿using System;
-using Slack.Api.Rtm;
-using Slack.Api.Web;
+using SlackApi.Rtm;
+using SlackApi.Web;
 
 namespace Bashi
 {
