@@ -15,15 +15,20 @@ namespace SlackApi.Rtm
         private readonly ClientWebSocket clientWebSocket;
         private readonly IRtmRequestFactory rtmRequestFactory;
         private readonly IRtmResponseFactory rtmResponseFactory;
+        private readonly ISlackRtmEventPublisher slackRtmEventPublisher;
         private readonly UTF8Encoding encoder;
 
         public SlackRtmClient(ClientWebSocket clientWebSocket,
                               IRtmRequestFactory rtmRequestFactory,
-                              IRtmResponseFactory rtmResponseFactory)
+                              IRtmResponseFactory rtmResponseFactory,
+                              ISlackRtmEventPublisher slackRtmEventPublisher)
         {
             this.clientWebSocket = clientWebSocket;
             this.rtmRequestFactory = rtmRequestFactory;
             this.rtmResponseFactory = rtmResponseFactory;
+            this.slackRtmEventPublisher = slackRtmEventPublisher;
+
+            slackRtmEventPublisher.AllMessages += (s, e) => Console.WriteLine($"<INFO> {e.Response}");
 
             encoder = new UTF8Encoding();
         }
@@ -49,15 +54,11 @@ namespace SlackApi.Rtm
                     try
                     {
                         var response = rtmResponseFactory.CreateResponse(json);
-                        Console.WriteLine($"<INFO> {response}");
+                        slackRtmEventPublisher.Fire(response);
                     }
                     catch (NotImplementedException e)
                     {
                         Console.WriteLine($"<ERROR> {e.Message}");
-                    }
-                    finally
-                    {
-                        Console.WriteLine($"<DEBUG> {json}");
                     }
                 }
             }

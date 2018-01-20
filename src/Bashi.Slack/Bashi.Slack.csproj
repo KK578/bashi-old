@@ -38,6 +38,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BashiRtmLogger.cs" />
     <Compile Include="Connection\SlackConnectionManager.cs" />
     <Compile Include="Connection\SlackConnectionParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
