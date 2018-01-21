@@ -2,9 +2,9 @@
 using Autofac.Extras.Moq;
 using NUnit.Framework;
 using SlackApi.Core.Data.Message.Rtm.Response.Rtm;
-using SlackApi.Core.Factory.Message;
+using SlackApi.Rtm.Factory;
 
-namespace SlackApi.Rtm.Test
+namespace SlackApi.Rtm.Test.Factory
 {
     [TestFixture]
     public class RtmResponseFactoryTest
@@ -44,7 +44,7 @@ namespace SlackApi.Rtm.Test
         }
 
         [Test]
-        [TestCase("message", null, typeof(MessageResponse))]
+        [TestCase("message", null, typeof(UserMessageResponse))]
         [TestCase("message", "bot_message", typeof(BotMessageResponse))]
         public void Deserialize_Message_ShouldCreateRelatedMessageResponseType(
             string type,

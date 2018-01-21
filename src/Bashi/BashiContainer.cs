@@ -1,12 +1,13 @@
 ﻿using System.Net.Http;
 using System.Net.WebSockets;
 using Autofac;
-using SlackApi.Core.Factory.Message;
 using SlackApi.Rtm;
 using SlackApi.Web;
 using Bashi.Core.Connection;
 using Bashi.Slack;
 using Bashi.Slack.Connection;
+using SlackApi.Rtm.Events;
+using SlackApi.Rtm.Factory;
 
 namespace Bashi
 {
