@@ -38,12 +38,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connection\ConnectionParamsFactory.cs" />
+    <Compile Include="Interface\Config\IConfigManager.cs" />
+    <Compile Include="Interface\Config\ISlackConfigGroup.cs" />
     <Compile Include="Interface\Connection\IConnectionManager.cs" />
-    <Compile Include="Interface\Connection\IConnectionParams.cs" />
-    <Compile Include="Interface\Connection\IConnectionParamsFactory.cs" />
     <Compile Include="Interface\Connection\ISlackConnectionManager.cs" />
-    <Compile Include="Interface\Connection\ISlackConnectionParams.cs" />
     <Compile Include="Interface\Logger\IEventLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -8,15 +8,13 @@ namespace Bashi
     internal class BashiApp
     {
         private readonly List<IConnectionManager> connectionManagers;
-        private readonly IConnectionParamsFactory connectionParamsFactory;
 
         public BashiApp(IEnumerable<IConnectionManager> connectionManagers,
-                        IConnectionParamsFactory connectionParamsFactory,
                         IEnumerable<IEventLogger> eventLoggers)
         {
-            this.connectionParamsFactory = connectionParamsFactory;
             this.connectionManagers = connectionManagers.ToList();
 
+            // TODO: Move this somewhere else...
             eventLoggers.ToList().ForEach(l => l.AttachLogger());
         }
 
@@ -24,8 +22,7 @@ namespace Bashi
         {
             connectionManagers.ForEach(manager =>
                                             {
-                                                var details = connectionParamsFactory.GetParams(manager);
-                                                manager.Connect(details);
+                                                manager.Connect();
                                             });
         }
     }
