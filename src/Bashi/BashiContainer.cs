@@ -31,6 +31,7 @@ namespace Bashi
             builder.RegisterType<RtmResponseFactory>().SingleInstance().AsImplementedInterfaces();
 
             // SlackApi.Rtm
+            builder.RegisterType<SlackRtmEventPublisher>().SingleInstance().AsImplementedInterfaces();
             builder.RegisterType<SlackRtmClient>().SingleInstance().AsImplementedInterfaces();
 
             // SlackApi.Web
