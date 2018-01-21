@@ -1,7 +1,12 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.IO;
+using System.Net.Http;
 using System.Net.WebSockets;
+using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using Autofac;
 using Bashi.Config;
+using Bashi.Core.Interface.Config;
 using SlackApi.Core.Factory.Message;
 using SlackApi.Rtm;
 using SlackApi.Web;
@@ -43,8 +48,11 @@ namespace Bashi
             builder.RegisterType<SlackEventLogger>().SingleInstance().AsImplementedInterfaces();
 
             // Bashi.Config
-            builder.Register(c => new ConfigManager("")).SingleInstance().AsImplementedInterfaces();
-            builder.Register(c => c.Resolve<ConfigManager>().SlackConfigGroup).AsImplementedInterfaces();
+            var configFilepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Bashi.config");
+            builder.Register(c => new BashiConfigFile(configFilepath)).SingleInstance().AsImplementedInterfaces();
+            builder.RegisterType<EnvConfigParser>().SingleInstance().AsImplementedInterfaces();
+            builder.RegisterType<BashiConfigManager>().SingleInstance().AsImplementedInterfaces();
+            builder.Register(c => c.Resolve<IBashiConfigManager>().SlackConfigGroup).SingleInstance().AsImplementedInterfaces();
 
             // Bashi
             builder.RegisterType<BashiApp>().SingleInstance().AsSelf();

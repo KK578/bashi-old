@@ -38,8 +38,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interface\Config\IConfigManager.cs" />
-    <Compile Include="Interface\Config\ISlackConfigGroup.cs" />
+    <Compile Include="Interface\Config\Group\ISlackConfigGroup.cs" />
+    <Compile Include="Interface\Config\IBashiConfigFile.cs" />
+    <Compile Include="Interface\Config\IBashiConfigManager.cs" />
+    <Compile Include="Interface\Config\IEnvConfigParser.cs" />
     <Compile Include="Interface\Connection\IConnectionManager.cs" />
     <Compile Include="Interface\Connection\ISlackConnectionManager.cs" />
     <Compile Include="Interface\Logger\IEventLogger.cs" />

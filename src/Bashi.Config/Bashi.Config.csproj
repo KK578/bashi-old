@@ -38,8 +38,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigManager.cs" />
-    <Compile Include="Groups\SlackConfigGroup.cs" />
+    <Compile Include="BashiConfigFile.cs" />
+    <Compile Include="BashiConfigManager.cs" />
+    <Compile Include="EnvConfigParser.cs" />
+    <Compile Include="Group\SlackConfigGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -47,6 +49,12 @@
       <Project>{E55231AF-4733-4D07-9B38-1851504E2991}</Project>
       <Name>Bashi.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bashi.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Bashi.config.template" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

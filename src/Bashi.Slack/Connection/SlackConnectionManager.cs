@@ -1,5 +1,6 @@
 ﻿using System;
 using Bashi.Core.Interface.Config;
+using Bashi.Core.Interface.Config.Group;
 using Bashi.Core.Interface.Connection;
 using SlackApi.Core.Interface.Rtm;
 using SlackApi.Core.Interface.Web;

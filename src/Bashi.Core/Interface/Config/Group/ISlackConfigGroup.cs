@@ -1,4 +1,4 @@
-﻿namespace Bashi.Core.Interface.Config
+﻿namespace Bashi.Core.Interface.Config.Group
 {
     public interface ISlackConfigGroup
     {
