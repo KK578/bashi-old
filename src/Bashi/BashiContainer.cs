@@ -1,13 +1,13 @@
 ﻿using System.Net.Http;
 using System.Net.WebSockets;
 using Autofac;
-using SlackApi.Rtm;
-using SlackApi.Web;
 using Bashi.Core.Connection;
 using Bashi.Slack;
 using Bashi.Slack.Connection;
+using SlackApi.Rtm;
 using SlackApi.Rtm.Events;
 using SlackApi.Rtm.Factory;
+using SlackApi.Web;
 
 namespace Bashi
 {
@@ -28,11 +28,9 @@ namespace Bashi
             // System.Net.WebSockets
             builder.RegisterType<ClientWebSocket>().AsSelf();
 
-            // SlackApi.Core
+            // SlackApi.Rtm
             builder.RegisterType<RtmRequestFactory>().SingleInstance().AsImplementedInterfaces();
             builder.RegisterType<RtmResponseFactory>().SingleInstance().AsImplementedInterfaces();
-
-            // SlackApi.Rtm
             builder.RegisterType<SlackRtmEventPublisher>().SingleInstance().AsImplementedInterfaces();
             builder.RegisterType<SlackRtmClient>().SingleInstance().AsImplementedInterfaces();
 
