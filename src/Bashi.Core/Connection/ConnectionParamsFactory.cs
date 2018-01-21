@@ -1,22 +1,23 @@
-﻿using Bashi.Interface.Connection;
-using Bashi.Slack.Connection;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Bashi.Core.Interface.Connection;
 
 namespace Bashi.Core.Connection
 {
-    public class ConnectionParamsFactory
+    public class ConnectionParamsFactory : IConnectionParamsFactory
     {
-        private readonly SlackConnectionParams slackConnectionParams;
+        private readonly List<IConnectionParams> connectionParams;
 
-        public ConnectionParamsFactory(SlackConnectionParams slackConnectionParams)
+        public ConnectionParamsFactory(IEnumerable<IConnectionParams> connectionParams)
         {
-            this.slackConnectionParams = slackConnectionParams;
+            this.connectionParams = connectionParams.ToList();
         }
 
         public IConnectionParams GetParams(IConnectionManager manager)
         {
-            if (manager is SlackConnectionManager)
+            if (manager is ISlackConnectionManager)
             {
-                return slackConnectionParams;
+                return connectionParams.First(p => p is ISlackConnectionParams);
             }
 
             return null;

@@ -5,6 +5,7 @@ using SlackApi.Core.Factory.Message;
 using SlackApi.Rtm;
 using SlackApi.Web;
 using Bashi.Core.Connection;
+using Bashi.Slack;
 using Bashi.Slack.Connection;
 
 namespace Bashi
@@ -39,9 +40,12 @@ namespace Bashi
 
             // Bashi.Slack
             builder.RegisterType<SlackConnectionManager>().SingleInstance().AsImplementedInterfaces();
+            builder.RegisterType<SlackEventLogger>().SingleInstance().AsImplementedInterfaces();
+
+            // Bashi.Core
+            builder.RegisterType<ConnectionParamsFactory>().SingleInstance().AsImplementedInterfaces();
 
             // Bashi
-            builder.RegisterType<ConnectionParamsFactory>().SingleInstance().AsSelf();
             builder.RegisterType<BashiApp>().SingleInstance().AsSelf();
 
             return builder.Build();
@@ -50,7 +54,7 @@ namespace Bashi
         public BashiContainer RegisterEnvironment(string token)
         {
             var slackConnectionParams = new SlackConnectionParams(token);
-            builder.RegisterInstance(slackConnectionParams).SingleInstance().AsSelf();
+            builder.RegisterInstance(slackConnectionParams).SingleInstance().AsImplementedInterfaces();
 
             return this;
         }

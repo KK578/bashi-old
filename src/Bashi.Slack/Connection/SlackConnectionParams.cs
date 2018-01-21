@@ -1,8 +1,8 @@
-﻿using Bashi.Interface.Connection;
+﻿using Bashi.Core.Interface.Connection;
 
 namespace Bashi.Slack.Connection
 {
-    public class SlackConnectionParams : IConnectionParams
+    public class SlackConnectionParams : ISlackConnectionParams
     {
         public string BotToken { get; }
 
