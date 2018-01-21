@@ -3,5 +3,6 @@
     public interface ISlackConfigGroup
     {
         string BotToken { get; }
+        int PingTimeout { get; }
     }
 }

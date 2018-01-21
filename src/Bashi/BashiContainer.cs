@@ -2,8 +2,6 @@
 using System.IO;
 using System.Net.Http;
 using System.Net.WebSockets;
-using System.Reflection;
-using System.Runtime.Remoting.Messaging;
 using Autofac;
 using Bashi.Config;
 using Bashi.Core.Interface.Config;

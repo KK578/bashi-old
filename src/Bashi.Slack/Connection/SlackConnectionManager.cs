@@ -1,5 +1,4 @@
 ﻿using System;
-using Bashi.Core.Interface.Config;
 using Bashi.Core.Interface.Config.Group;
 using Bashi.Core.Interface.Connection;
 using SlackApi.Core.Interface.Rtm;
@@ -9,7 +8,7 @@ namespace Bashi.Slack.Connection
 {
     public class SlackConnectionManager : ISlackConnectionManager
     {
-        private readonly ISlackConfigGroup slackConfigGroup;
+        private readonly string botToken;
         private readonly ISlackWebClient slackWebClient;
         private readonly ISlackRtmClient slackRtmClient;
 
@@ -17,19 +16,19 @@ namespace Bashi.Slack.Connection
                                       ISlackRtmClient slackRtmClient,
                                       ISlackWebClient slackWebClient)
         {
-            this.slackConfigGroup = slackConfigGroup;
+            botToken = slackConfigGroup.BotToken;
             this.slackRtmClient = slackRtmClient;
             this.slackWebClient = slackWebClient;
         }
 
         public void Connect()
         {
-            SetupRtmClient(slackConfigGroup.BotToken);
+            SetupRtmClient();
         }
 
-        private async void SetupRtmClient(string token)
+        private async void SetupRtmClient()
         {
-            var connectResponse = await slackWebClient.RtmConnectAsync(token);
+            var connectResponse = await slackWebClient.RtmConnectAsync(botToken);
 
             if (string.IsNullOrEmpty(connectResponse.WebSocketUrl))
             {

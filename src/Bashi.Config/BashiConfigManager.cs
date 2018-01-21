@@ -30,6 +30,10 @@ namespace Bashi.Config
                         slackConfigGroup.BotToken = keyValuePair.Value;
                         break;
 
+                    case "SLACK_PING_TIMEOUT":
+                        slackConfigGroup.PingTimeout = int.Parse(keyValuePair.Value);
+                        break;
+
                     default:
                         Console.WriteLine($"Unknown ConfigFile key '{keyValuePair.Key}'");
                         break;

@@ -3,27 +3,30 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Bashi.Core.Interface.Config.Group;
 using SlackApi.Core.Interface.Rtm;
 
 namespace SlackApi.Rtm
 {
     public class SlackRtmClient : ISlackRtmClient
     {
-        private const int PingTimeout = 5000;
         private const int BufferSize = 1024;
 
         private readonly ClientWebSocket clientWebSocket;
+        private readonly int pingTimeout;
         private readonly IRtmRequestFactory rtmRequestFactory;
         private readonly IRtmResponseFactory rtmResponseFactory;
         private readonly ISlackRtmEventPublisher slackRtmEventPublisher;
         private readonly UTF8Encoding encoder;
 
         public SlackRtmClient(ClientWebSocket clientWebSocket,
+                              ISlackConfigGroup slackConfigGroup,
                               IRtmRequestFactory rtmRequestFactory,
                               IRtmResponseFactory rtmResponseFactory,
                               ISlackRtmEventPublisher slackRtmEventPublisher)
         {
             this.clientWebSocket = clientWebSocket;
+            pingTimeout = slackConfigGroup.PingTimeout;
             this.rtmRequestFactory = rtmRequestFactory;
             this.rtmResponseFactory = rtmResponseFactory;
             this.slackRtmEventPublisher = slackRtmEventPublisher;
@@ -81,7 +84,7 @@ namespace SlackApi.Rtm
                 {
                     await SendRequest();
 
-                    await Task.Delay(PingTimeout);
+                    await Task.Delay(pingTimeout);
                 }
             }
 
