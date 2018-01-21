@@ -40,7 +40,6 @@
   <ItemGroup>
     <Compile Include="SlackEventLogger.cs" />
     <Compile Include="Connection\SlackConnectionManager.cs" />
-    <Compile Include="Connection\SlackConnectionParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

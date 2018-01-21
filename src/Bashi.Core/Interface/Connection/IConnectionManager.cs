@@ -2,6 +2,6 @@
 {
     public interface IConnectionManager
     {
-        void Connect(IConnectionParams details);
+        void Connect();
     }
 }
