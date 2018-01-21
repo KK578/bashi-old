@@ -89,6 +89,21 @@ namespace Bashi.Core.Test
         }
 
         [Test]
+        public void Parse_LineWithoutActualValue_ReturnsKeyPairValue()
+        {
+            var keyPairs = subject.Parse(CreateInput()).ToList();
+
+            Assert.That(keyPairs.Count, Is.EqualTo(1));
+            Assert.That(keyPairs[0].Key, Is.EqualTo("ABC"));
+            Assert.That(keyPairs[0].Value, Is.EqualTo(""));
+
+            IEnumerable<string> CreateInput()
+            {
+                yield return "ABC=";
+            }
+        }
+
+        [Test]
         public void Parse_MultipleLinesWithEquals_ReturnsKeyPairValue()
         {
             var keyPairs = subject.Parse(CreateInput()).ToList();
