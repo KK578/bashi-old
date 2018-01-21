@@ -27,9 +27,6 @@ namespace SlackApi.Rtm
             this.rtmRequestFactory = rtmRequestFactory;
             this.rtmResponseFactory = rtmResponseFactory;
             this.slackRtmEventPublisher = slackRtmEventPublisher;
-
-            slackRtmEventPublisher.AllMessages += (s, e) => Console.WriteLine($"<INFO> {e.Response}");
-
             encoder = new UTF8Encoding();
         }
 
