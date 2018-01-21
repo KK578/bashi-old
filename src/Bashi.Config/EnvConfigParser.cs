@@ -9,16 +9,30 @@ namespace Bashi.Config
         {
             foreach (var line in lines)
             {
-                var index = line.IndexOf('=');
-
-                if (index >= 0 || index == line.Length - 1)
+                if (string.IsNullOrWhiteSpace(line))
                 {
-                    var key = line.Substring(0, index);
-                    var value = line.Substring(index + 1);
+                    continue;
+                }
+
+                var trimmed = line.Trim();
+
+                if (IsComment(trimmed))
+                {
+                    continue;
+                }
+
+                var index = trimmed.IndexOf('=');
+
+                if (index >= 0 || index == trimmed.Length - 1)
+                {
+                    var key = trimmed.Substring(0, index).Trim();
+                    var value = trimmed.Substring(index + 1).Trim();
 
                     yield return new KeyValuePair<string, string>(key, value);
                 }
             }
         }
+
+        private static bool IsComment(string line) => line.StartsWith("#");
     }
 }
