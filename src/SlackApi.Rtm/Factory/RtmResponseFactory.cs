@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using SlackApi.Core.Data.Message.Rtm.Response.Rtm;
 using SlackApi.Core.Interface.Rtm;
 
-namespace SlackApi.Core.Factory.Message
+namespace SlackApi.Rtm.Factory
 {
     public class RtmResponseFactory : IRtmResponseFactory
     {
@@ -28,7 +28,7 @@ namespace SlackApi.Core.Factory.Message
             }
         }
 
-        private static MessageResponse CreateMessageResponse(string json)
+        private static BaseMessageResponse CreateMessageResponse(string json)
         {
             dynamic jsonObject = JsonConvert.DeserializeObject(json);
             string subtype = jsonObject.subtype;
@@ -39,7 +39,7 @@ namespace SlackApi.Core.Factory.Message
                     return CreateResponse<BotMessageResponse>(json);
 
                 default:
-                    return CreateResponse<MessageResponse>(json);
+                    return CreateResponse<UserMessageResponse>(json);
             }
         }
 

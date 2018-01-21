@@ -47,15 +47,12 @@
     <Compile Include="Data\Message\Rtm\Response\Rtm\BaseRtmResponse.cs" />
     <Compile Include="Data\Message\Rtm\Response\Rtm\BotMessageResponse.cs" />
     <Compile Include="Data\Message\Rtm\Response\Rtm\HelloResponse.cs" />
-    <Compile Include="Data\Message\Rtm\Response\Rtm\MessageResponse.cs" />
     <Compile Include="Data\Message\Rtm\Response\Rtm\PongResponse.cs" />
     <Compile Include="Data\Message\Rtm\Response\Rtm\UserMessageResponse.cs" />
     <Compile Include="Data\Message\Rtm\Response\Rtm\UserTypingResponse.cs" />
     <Compile Include="Data\Message\Rtm\Response\Rtm\WebSocketResponse.cs" />
     <Compile Include="Data\Message\Web\Response\Rtm\RtmConnectResponse.cs" />
     <Compile Include="Events\Rtm\RtmMessageEventArgs.cs" />
-    <Compile Include="Factory\Message\RtmRequestFactory.cs" />
-    <Compile Include="Factory\Message\RtmResponseFactory.cs" />
     <Compile Include="Interface\Rtm\IRtmRequestFactory.cs" />
     <Compile Include="Interface\Rtm\IRtmResponseFactory.cs" />
     <Compile Include="Interface\Rtm\ISlackRtmClient.cs" />

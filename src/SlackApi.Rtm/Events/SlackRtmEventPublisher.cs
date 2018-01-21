@@ -3,7 +3,7 @@ using SlackApi.Core.Data.Message.Rtm.Response.Rtm;
 using SlackApi.Core.Events.Rtm;
 using SlackApi.Core.Interface.Rtm;
 
-namespace SlackApi.Rtm
+namespace SlackApi.Rtm.Events
 {
     public class SlackRtmEventPublisher : ISlackRtmEventPublisher
     {
@@ -19,25 +19,25 @@ namespace SlackApi.Rtm
         public void Fire(BaseRtmResponse response)
         {
             AllMessages?.Invoke(this, new RtmMessageEventArgs<BaseRtmResponse>(response));
-            switch (response.Type)
-            {
-                case "hello":
-                    HelloMessage?.Invoke(this, new RtmMessageEventArgs<HelloResponse>(response));
+
+            switch (response) {
+                case HelloResponse helloResponse:
+                    HelloMessage?.Invoke(this, new RtmMessageEventArgs<HelloResponse>(helloResponse));
                     break;
-                case "pong":
-                    PongMessage?.Invoke(this, new RtmMessageEventArgs<PongResponse>(response));
+                case PongResponse pongResponse:
+                    PongMessage?.Invoke(this, new RtmMessageEventArgs<PongResponse>(pongResponse));
                     break;
-                case "user_typing":
-                    UserTypingMessage?.Invoke(this, new RtmMessageEventArgs<UserTypingResponse>(response));
+                case UserTypingResponse userTypingResponse:
+                    UserTypingMessage?.Invoke(this, new RtmMessageEventArgs<UserTypingResponse>(userTypingResponse));
                     break;
-                case "message":
-                    switch (((MessageResponse)response).Subtype)
+                case BaseMessageResponse messageResponse:
+                    switch (messageResponse)
                     {
-                        case "bot_message":
-                            BotMessage?.Invoke(this, new RtmMessageEventArgs<BotMessageResponse>(response));
+                        case BotMessageResponse botMessageResponse:
+                            BotMessage?.Invoke(this, new RtmMessageEventArgs<BotMessageResponse>(botMessageResponse));
                             break;
                         default:
-                            UserMessage?.Invoke(this, new RtmMessageEventArgs<UserMessageResponse>(response));
+                            UserMessage?.Invoke(this, new RtmMessageEventArgs<UserMessageResponse>(messageResponse));
                             break;
                     }
                     break;
