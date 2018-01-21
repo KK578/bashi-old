@@ -1,7 +1,7 @@
 ﻿using SlackApi.Core.Data.Message.Rtm.Request;
 using SlackApi.Core.Interface.Rtm;
 
-namespace SlackApi.Core.Factory.Message
+namespace SlackApi.Rtm.Factory
 {
     public class RtmRequestFactory : IRtmRequestFactory
     {
