@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BashiConfigFileTest.cs" />
+    <Compile Include="BashiConfigManagerTest.cs" />
     <Compile Include="EnvConfigParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -67,6 +68,10 @@
     <ProjectReference Include="..\..\src\Bashi.Config\Bashi.Config.csproj">
       <Project>{2E4EF3E2-BD71-4D45-8667-8A383ACD62A7}</Project>
       <Name>Bashi.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Bashi.Core\Bashi.Core.csproj">
+      <Project>{E55231AF-4733-4D07-9B38-1851504E2991}</Project>
+      <Name>Bashi.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
