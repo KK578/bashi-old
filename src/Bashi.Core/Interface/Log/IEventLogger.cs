@@ -1,4 +1,4 @@
-﻿namespace Bashi.Core.Interface.Logger
+﻿namespace Bashi.Core.Interface.Log
 {
     public interface IEventLogger
     {

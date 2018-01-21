@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{69096D00-0747-4FF1-A5C5-C29C49E3B7A1}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{75FDA375-CFDD-494A-AD92-951EDEA50426}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bashi</RootNamespace>
-    <AssemblyName>Bashi</AssemblyName>
+    <RootNamespace>Bashi.Log</RootNamespace>
+    <AssemblyName>Bashi.Log</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin/Debug/</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -35,64 +35,35 @@
     <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da">
       <HintPath>..\..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a">
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BashiApp.cs" />
-    <Compile Include="BashiContainer.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="BashiLogger.cs" />
+    <Compile Include="BashiLoggerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bashi.Config\Bashi.Config.csproj">
-      <Project>{2E4EF3E2-BD71-4D45-8667-8A383ACD62A7}</Project>
-      <Name>Bashi.Config</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Bashi.Core\Bashi.Core.csproj">
       <Project>{E55231AF-4733-4D07-9B38-1851504E2991}</Project>
       <Name>Bashi.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Bashi.Log\Bashi.Log.csproj">
-      <Project>{75FDA375-CFDD-494A-AD92-951EDEA50426}</Project>
-      <Name>Bashi.Log</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bashi.Slack\Bashi.Slack.csproj">
-      <Project>{A1DFF872-8384-4E1A-A8A5-5A2FE00886AC}</Project>
-      <Name>Bashi.Slack</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SlackApi.Core\SlackApi.Core.csproj">
-      <Project>{F432F154-E8EB-418C-88B8-6967483E8F6D}</Project>
-      <Name>SlackApi.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SlackApi.Rtm\SlackApi.Rtm.csproj">
-      <Project>{8A0FF980-FD28-44AD-9786-23A3BE66F2B9}</Project>
-      <Name>SlackApi.Rtm</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SlackApi.Web\SlackApi.Web.csproj">
-      <Project>{DB6CA283-84E7-48D9-8861-F4C1DB3EBAC8}</Project>
-      <Name>SlackApi.Web</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\Bashi.cake">
-      <Link>Bashi.cake</Link>
-    </Content>
-    <Content Include="..\..\build.ps1">
-      <Link>build.ps1</Link>
-    </Content>
-    <Content Include="..\..\build.sh">
-      <Link>build.sh</Link>
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.
     <Target Name="BeforeBuild">
     </Target>

@@ -44,7 +44,8 @@
     <Compile Include="Interface\Config\IEnvConfigParser.cs" />
     <Compile Include="Interface\Connection\IConnectionManager.cs" />
     <Compile Include="Interface\Connection\ISlackConnectionManager.cs" />
-    <Compile Include="Interface\Logger\IEventLogger.cs" />
+    <Compile Include="Interface\Log\IEventLogger.cs" />
+    <Compile Include="Interface\Log\IBashiLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

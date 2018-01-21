@@ -1,5 +1,4 @@
-﻿using System;
-using Bashi.Core.Interface.Logger;
+﻿using Bashi.Core.Interface.Log;
 using SlackApi.Core.Interface.Rtm;
 
 namespace Bashi.Slack
@@ -7,15 +6,17 @@ namespace Bashi.Slack
     public class SlackEventLogger : IEventLogger
     {
         private readonly ISlackRtmEventPublisher slackRtmEventPublisher;
+        private readonly IBashiLogger log;
 
-        public SlackEventLogger(ISlackRtmEventPublisher slackRtmEventPublisher)
+        public SlackEventLogger(ISlackRtmEventPublisher slackRtmEventPublisher, IBashiLogger log)
         {
             this.slackRtmEventPublisher = slackRtmEventPublisher;
+            this.log = log;
         }
 
         public void AttachLogger()
         {
-            slackRtmEventPublisher.AllMessages += (s, e) => Console.WriteLine($"<INFO> {e.Response}");
+            slackRtmEventPublisher.AllMessages += (s, e) => log.Info(e.Response.ToString());
         }
     }
 }
