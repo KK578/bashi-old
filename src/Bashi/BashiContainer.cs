@@ -1,7 +1,5 @@
 ﻿using System.Net.Http;
 using System.Net.WebSockets;
-using System.Reflection;
-using System.Runtime.Remoting.Messaging;
 using Autofac;
 using Bashi.Config;
 using SlackApi.Core.Factory.Message;
