@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.Net.Http;
+using Autofac;
 using SlackApi.Web.Client;
 
 namespace SlackApi.Web
@@ -8,6 +9,8 @@ namespace SlackApi.Web
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
+
+            builder.RegisterType<HttpClient>().SingleInstance().AsSelf();
 
             builder.RegisterType<SlackWebClient>().SingleInstance().AsImplementedInterfaces();
         }

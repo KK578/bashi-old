@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.Net.WebSockets;
+using Autofac;
 using SlackApi.Rtm.Client;
 using SlackApi.Rtm.Events;
 using SlackApi.Rtm.Factory;
@@ -10,6 +11,8 @@ namespace SlackApi.Rtm
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
+
+            builder.RegisterType<ClientWebSocket>().AsSelf();
 
             builder.RegisterType<RtmRequestFactory>().SingleInstance().AsImplementedInterfaces();
             builder.RegisterType<RtmResponseFactory>().SingleInstance().AsImplementedInterfaces();

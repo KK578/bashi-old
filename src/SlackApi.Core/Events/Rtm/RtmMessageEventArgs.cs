@@ -1,6 +1,5 @@
 ﻿using System;
 using SlackApi.Core.Base.Rtm;
-using SlackApi.Core.Data.Message.Rtm.Response.Rtm;
 
 namespace SlackApi.Core.Events.Rtm
 {
