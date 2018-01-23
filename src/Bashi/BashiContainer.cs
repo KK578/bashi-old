@@ -44,7 +44,7 @@ namespace Bashi
 
             builder.RegisterModule(new BashiSlackModule());
 
-            builder.RegisterModule(new BashiLoggerModule());
+            builder.RegisterModule(new BashiLogModule());
 
             builder.RegisterModule(new BashiConfigModule());
 

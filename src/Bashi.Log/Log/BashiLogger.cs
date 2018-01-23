@@ -1,7 +1,7 @@
 ﻿using Bashi.Core.Interface.Log;
 using log4net;
 
-namespace Bashi.Log
+namespace Bashi.Log.Log
 {
     internal class BashiLogger : IBashiLogger
     {
