@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using Bashi.Config.File;
 using NUnit.Framework;
 
 namespace Bashi.Config.Test

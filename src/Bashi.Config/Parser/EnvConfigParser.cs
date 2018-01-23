@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Bashi.Core.Interface.Config;
 
-namespace Bashi.Config
+namespace Bashi.Config.Parser
 {
     internal class EnvConfigParser : IEnvConfigParser
     {

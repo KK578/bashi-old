@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Bashi.Config.Parser;
 using NUnit.Framework;
 
 namespace Bashi.Config.Test

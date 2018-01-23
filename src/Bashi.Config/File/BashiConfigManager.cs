@@ -3,7 +3,7 @@ using Bashi.Core.Interface.Config;
 using Bashi.Core.Interface.Config.Group;
 using Bashi.Core.Interface.Log;
 
-namespace Bashi.Config
+namespace Bashi.Config.File
 {
     internal class BashiConfigManager : IBashiConfigManager
     {

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using Autofac;
+using Bashi.Config.File;
+using Bashi.Config.Parser;
 using Bashi.Core.Interface.Config;
 
 namespace Bashi.Config

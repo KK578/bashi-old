@@ -41,11 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BashiConfigFile.cs" />
-    <Compile Include="BashiConfigManager.cs" />
     <Compile Include="BashiConfigModule.cs" />
-    <Compile Include="EnvConfigParser.cs" />
+    <Compile Include="File\BashiConfigFile.cs" />
+    <Compile Include="File\BashiConfigManager.cs" />
     <Compile Include="Group\SlackConfigGroup.cs" />
+    <Compile Include="Parser\EnvConfigParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
