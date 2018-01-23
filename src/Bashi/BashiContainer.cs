@@ -10,6 +10,7 @@ using Bashi.Slack;
 using Bashi.Slack.Connection;
 using Bashi.Slack.Log;
 using SlackApi.Rtm;
+using SlackApi.Rtm.Client;
 using SlackApi.Rtm.Events;
 using SlackApi.Rtm.Factory;
 using SlackApi.Web;
@@ -34,10 +35,7 @@ namespace Bashi
             builder.RegisterType<ClientWebSocket>().AsSelf();
 
             // SlackApi.Rtm
-            builder.RegisterType<RtmRequestFactory>().SingleInstance().AsImplementedInterfaces();
-            builder.RegisterType<RtmResponseFactory>().SingleInstance().AsImplementedInterfaces();
-            builder.RegisterType<SlackRtmEventPublisher>().SingleInstance().AsImplementedInterfaces();
-            builder.RegisterType<SlackRtmClient>().SingleInstance().AsImplementedInterfaces();
+            builder.RegisterModule(new SlackApiRtmModule());
 
             // SlackApi.Web
             builder.RegisterType<SlackWebClient>().SingleInstance().AsImplementedInterfaces();

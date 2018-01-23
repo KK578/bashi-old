@@ -7,9 +7,9 @@ using Bashi.Core.Interface.Config.Group;
 using Bashi.Core.Interface.Log;
 using SlackApi.Core.Interface.Rtm;
 
-namespace SlackApi.Rtm
+namespace SlackApi.Rtm.Client
 {
-    public class SlackRtmClient : ISlackRtmClient
+    internal class SlackRtmClient : ISlackRtmClient
     {
         private const int BufferSize = 1024;
 

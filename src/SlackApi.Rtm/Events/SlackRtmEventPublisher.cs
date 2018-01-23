@@ -6,7 +6,7 @@ using SlackApi.Core.Interface.Rtm;
 
 namespace SlackApi.Rtm.Events
 {
-    public class SlackRtmEventPublisher : ISlackRtmEventPublisher
+    internal class SlackRtmEventPublisher : ISlackRtmEventPublisher
     {
         public event EventHandler<RtmMessageEventArgs<BaseRtmResponse>> AllMessages;
 

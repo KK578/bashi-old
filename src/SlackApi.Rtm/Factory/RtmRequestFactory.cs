@@ -3,7 +3,7 @@ using SlackApi.Core.Interface.Rtm;
 
 namespace SlackApi.Rtm.Factory
 {
-    public class RtmRequestFactory : IRtmRequestFactory
+    internal class RtmRequestFactory : IRtmRequestFactory
     {
         private int pingMessageId;
 
