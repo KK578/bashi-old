@@ -3,7 +3,7 @@ using log4net;
 
 namespace Bashi.Log
 {
-    public class BashiLogger : IBashiLogger
+    internal class BashiLogger : IBashiLogger
     {
         private readonly ILog logger;
 
