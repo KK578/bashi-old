@@ -37,8 +37,7 @@ namespace Bashi
             // SlackApi.Rtm
             builder.RegisterModule(new SlackApiRtmModule());
 
-            // SlackApi.Web
-            builder.RegisterType<SlackWebClient>().SingleInstance().AsImplementedInterfaces();
+            builder.RegisterModule(new SlackApiWebModule());
 
             builder.RegisterModule(new BashiSlackModule());
 
