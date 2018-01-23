@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace SlackApi.Core.Data.Message.Rtm.Response.Rtm
+namespace SlackApi.Core.Base.Rtm
 {
     public abstract class BaseRtmResponse
     {

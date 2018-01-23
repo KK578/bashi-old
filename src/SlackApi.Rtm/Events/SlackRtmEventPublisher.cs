@@ -1,4 +1,5 @@
 ﻿using System;
+using SlackApi.Core.Base.Rtm;
 using SlackApi.Core.Data.Message.Rtm.Response.Rtm;
 using SlackApi.Core.Events.Rtm;
 using SlackApi.Core.Interface.Rtm;
