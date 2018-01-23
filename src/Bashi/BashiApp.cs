@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bashi.Core.Interface.Connection;
-using Bashi.Core.Interface.Logger;
+using Bashi.Core.Interface.Log;
 
 namespace Bashi
 {

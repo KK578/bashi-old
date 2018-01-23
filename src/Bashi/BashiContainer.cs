@@ -5,6 +5,7 @@ using System.Net.WebSockets;
 using Autofac;
 using Bashi.Config;
 using Bashi.Core.Interface.Config;
+using Bashi.Log;
 using Bashi.Slack;
 using Bashi.Slack.Connection;
 using SlackApi.Rtm;
@@ -43,6 +44,9 @@ namespace Bashi
             // Bashi.Slack
             builder.RegisterType<SlackConnectionManager>().SingleInstance().AsImplementedInterfaces();
             builder.RegisterType<SlackEventLogger>().SingleInstance().AsImplementedInterfaces();
+
+            // Bashi.Log
+            builder.RegisterModule(new BashiLoggerModule());
 
             // Bashi.Config
             var configFilepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Bashi.config");

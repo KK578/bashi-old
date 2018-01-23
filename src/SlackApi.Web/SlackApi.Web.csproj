@@ -46,6 +46,10 @@
     <Compile Include="SlackWebClient.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bashi.Core\Bashi.Core.csproj">
+      <Project>{E55231AF-4733-4D07-9B38-1851504E2991}</Project>
+      <Name>Bashi.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SlackApi.Core\SlackApi.Core.csproj">
       <Project>{F432F154-E8EB-418C-88B8-6967483E8F6D}</Project>
       <Name>SlackApi.Core</Name>

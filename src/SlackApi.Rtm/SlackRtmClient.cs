@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Bashi.Core.Interface.Config.Group;
+using Bashi.Core.Interface.Log;
 using SlackApi.Core.Interface.Rtm;
 
 namespace SlackApi.Rtm
@@ -17,19 +18,22 @@ namespace SlackApi.Rtm
         private readonly IRtmRequestFactory rtmRequestFactory;
         private readonly IRtmResponseFactory rtmResponseFactory;
         private readonly ISlackRtmEventPublisher slackRtmEventPublisher;
+        private readonly IBashiLogger log;
         private readonly UTF8Encoding encoder;
 
         public SlackRtmClient(ClientWebSocket clientWebSocket,
                               ISlackConfigGroup slackConfigGroup,
                               IRtmRequestFactory rtmRequestFactory,
                               IRtmResponseFactory rtmResponseFactory,
-                              ISlackRtmEventPublisher slackRtmEventPublisher)
+                              ISlackRtmEventPublisher slackRtmEventPublisher,
+                              IBashiLogger log)
         {
             this.clientWebSocket = clientWebSocket;
             pingTimeout = slackConfigGroup.PingTimeout;
             this.rtmRequestFactory = rtmRequestFactory;
             this.rtmResponseFactory = rtmResponseFactory;
             this.slackRtmEventPublisher = slackRtmEventPublisher;
+            this.log = log;
             encoder = new UTF8Encoding();
         }
 
@@ -58,7 +62,11 @@ namespace SlackApi.Rtm
                     }
                     catch (NotImplementedException e)
                     {
-                        Console.WriteLine($"<ERROR> {e.Message}");
+                        log.Error(e.Message);
+                    }
+                    finally
+                    {
+                        log.Debug(json);
                     }
                 }
             }

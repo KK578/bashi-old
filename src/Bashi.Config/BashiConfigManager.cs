@@ -2,17 +2,20 @@
 using Bashi.Config.Group;
 using Bashi.Core.Interface.Config;
 using Bashi.Core.Interface.Config.Group;
+using Bashi.Core.Interface.Log;
 
 namespace Bashi.Config
 {
     public class BashiConfigManager : IBashiConfigManager
     {
+        private readonly IBashiLogger log;
         private readonly SlackConfigGroup slackConfigGroup;
 
         public ISlackConfigGroup SlackConfigGroup => slackConfigGroup;
 
-        public BashiConfigManager(IEnvConfigParser parser, IBashiConfigFile file)
+        public BashiConfigManager(IEnvConfigParser parser, IBashiConfigFile file, IBashiLogger log)
         {
+            this.log = log;
             slackConfigGroup = new SlackConfigGroup();
 
             ParseConfig(parser, file);
@@ -35,7 +38,7 @@ namespace Bashi.Config
                         break;
 
                     default:
-                        Console.WriteLine($"Unknown ConfigFile key '{keyValuePair.Key}'");
+                        log.Error($"Unknown ConfigFile key '{keyValuePair.Key}'");
                         break;
                 }
             }
