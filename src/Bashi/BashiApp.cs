@@ -20,10 +20,7 @@ namespace Bashi
 
         public void Connect()
         {
-            connectionManagers.ForEach(manager =>
-                                            {
-                                                manager.Connect();
-                                            });
+            connectionManagers.ForEach(manager => manager.Connect());
         }
     }
 }

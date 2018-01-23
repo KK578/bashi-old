@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Bashi.Core.Interface.Config;
 
-namespace Bashi.Config
+namespace Bashi.Config.Parser
 {
-    public class EnvConfigParser : IEnvConfigParser
+    internal class EnvConfigParser : IEnvConfigParser
     {
         public IEnumerable<KeyValuePair<string, string>> Parse(IEnumerable<string> lines)
         {

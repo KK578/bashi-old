@@ -42,15 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\Rtm\BaseMessageResponse.cs" />
+    <Compile Include="Base\Rtm\BaseRtmResponse.cs" />
     <Compile Include="Data\Message\Rtm\Request\PingRequest.cs" />
-    <Compile Include="Data\Message\Rtm\Response\Rtm\BaseMessageResponse.cs" />
-    <Compile Include="Data\Message\Rtm\Response\Rtm\BaseRtmResponse.cs" />
     <Compile Include="Data\Message\Rtm\Response\Rtm\BotMessageResponse.cs" />
     <Compile Include="Data\Message\Rtm\Response\Rtm\HelloResponse.cs" />
     <Compile Include="Data\Message\Rtm\Response\Rtm\PongResponse.cs" />
     <Compile Include="Data\Message\Rtm\Response\Rtm\UserMessageResponse.cs" />
     <Compile Include="Data\Message\Rtm\Response\Rtm\UserTypingResponse.cs" />
-    <Compile Include="Data\Message\Rtm\Response\Rtm\WebSocketResponse.cs" />
     <Compile Include="Data\Message\Web\Response\Rtm\RtmConnectResponse.cs" />
     <Compile Include="Events\Rtm\RtmMessageEventArgs.cs" />
     <Compile Include="Interface\Rtm\IRtmRequestFactory.cs" />

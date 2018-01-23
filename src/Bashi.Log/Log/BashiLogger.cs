@@ -1,9 +1,9 @@
 ﻿using Bashi.Core.Interface.Log;
 using log4net;
 
-namespace Bashi.Log
+namespace Bashi.Log.Log
 {
-    public class BashiLogger : IBashiLogger
+    internal class BashiLogger : IBashiLogger
     {
         private readonly ILog logger;
 

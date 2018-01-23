@@ -1,11 +1,12 @@
 ﻿using System;
 using Newtonsoft.Json;
+using SlackApi.Core.Base.Rtm;
 using SlackApi.Core.Data.Message.Rtm.Response.Rtm;
 using SlackApi.Core.Interface.Rtm;
 
 namespace SlackApi.Rtm.Factory
 {
-    public class RtmResponseFactory : IRtmResponseFactory
+    internal class RtmResponseFactory : IRtmResponseFactory
     {
         public BaseRtmResponse CreateResponse(string json)
         {

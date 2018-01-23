@@ -44,8 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BashiLogger.cs" />
-    <Compile Include="BashiLoggerModule.cs" />
+    <Compile Include="BashiLogModule.cs" />
+    <Compile Include="Log\BashiLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿using SlackApi.Core.Data.Message.Rtm.Response.Rtm;
+﻿using SlackApi.Core.Base.Rtm;
 
 namespace SlackApi.Core.Interface.Rtm
 {

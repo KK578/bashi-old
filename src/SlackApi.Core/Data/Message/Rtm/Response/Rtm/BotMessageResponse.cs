@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SlackApi.Core.Base.Rtm;
 
 namespace SlackApi.Core.Data.Message.Rtm.Response.Rtm
 {

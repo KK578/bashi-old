@@ -1,12 +1,11 @@
-﻿using System;
-using Bashi.Config.Group;
+﻿using Bashi.Config.Group;
 using Bashi.Core.Interface.Config;
 using Bashi.Core.Interface.Config.Group;
 using Bashi.Core.Interface.Log;
 
-namespace Bashi.Config
+namespace Bashi.Config.File
 {
-    public class BashiConfigManager : IBashiConfigManager
+    internal class BashiConfigManager : IBashiConfigManager
     {
         private readonly IBashiLogger log;
         private readonly SlackConfigGroup slackConfigGroup;

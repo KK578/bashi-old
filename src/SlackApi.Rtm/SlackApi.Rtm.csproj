@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da">
+      <HintPath>..\..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
       <HintPath>..\..\packages\Newtonsoft.Json.11.0.1-beta3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -42,11 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\SlackRtmClient.cs" />
     <Compile Include="Events\SlackRtmEventPublisher.cs" />
     <Compile Include="Factory\RtmRequestFactory.cs" />
     <Compile Include="Factory\RtmResponseFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SlackRtmClient.cs" />
+    <Compile Include="SlackApiRtmModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bashi.Core\Bashi.Core.csproj">

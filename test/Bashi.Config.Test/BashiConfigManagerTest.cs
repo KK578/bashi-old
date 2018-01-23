@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Autofac.Extras.Moq;
-using Bashi.Config;
+using Bashi.Config.File;
 using Bashi.Core.Interface.Config;
 using Moq;
 using NUnit.Framework;
 
-namespace Bashi.Core.Test
+namespace Bashi.Config.Test
 {
     public class BashiConfigManagerTest
     {

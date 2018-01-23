@@ -1,5 +1,6 @@
 ﻿using Autofac.Extras.Moq;
 using NUnit.Framework;
+using SlackApi.Core.Base.Rtm;
 using SlackApi.Core.Data.Message.Rtm.Response.Rtm;
 using SlackApi.Rtm.Events;
 

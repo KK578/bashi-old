@@ -1,9 +1,9 @@
 ﻿using Bashi.Core.Interface.Log;
 using SlackApi.Core.Interface.Rtm;
 
-namespace Bashi.Slack
+namespace Bashi.Slack.Log
 {
-    public class SlackEventLogger : IEventLogger
+    internal class SlackEventLogger : IEventLogger
     {
         private readonly ISlackRtmEventPublisher slackRtmEventPublisher;
         private readonly IBashiLogger log;

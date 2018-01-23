@@ -6,9 +6,9 @@ using Newtonsoft.Json;
 using SlackApi.Core.Data.Message.Web.Response.Rtm;
 using SlackApi.Core.Interface.Web;
 
-namespace SlackApi.Web
+namespace SlackApi.Web.Client
 {
-    public class SlackWebClient : ISlackWebClient
+    internal class SlackWebClient : ISlackWebClient
     {
         private readonly HttpClient httpClient;
         private readonly IBashiLogger log;
