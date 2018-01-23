@@ -8,6 +8,7 @@ using Bashi.Core.Interface.Config;
 using Bashi.Log;
 using Bashi.Slack;
 using Bashi.Slack.Connection;
+using Bashi.Slack.Log;
 using SlackApi.Rtm;
 using SlackApi.Rtm.Events;
 using SlackApi.Rtm.Factory;
@@ -41,11 +42,8 @@ namespace Bashi
             // SlackApi.Web
             builder.RegisterType<SlackWebClient>().SingleInstance().AsImplementedInterfaces();
 
-            // Bashi.Slack
-            builder.RegisterType<SlackConnectionManager>().SingleInstance().AsImplementedInterfaces();
-            builder.RegisterType<SlackEventLogger>().SingleInstance().AsImplementedInterfaces();
+            builder.RegisterModule(new BashiSlackModule());
 
-            // Bashi.Log
             builder.RegisterModule(new BashiLoggerModule());
 
             builder.RegisterModule(new BashiConfigModule());

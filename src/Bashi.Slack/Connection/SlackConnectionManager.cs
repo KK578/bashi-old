@@ -7,7 +7,7 @@ using SlackApi.Core.Interface.Web;
 
 namespace Bashi.Slack.Connection
 {
-    public class SlackConnectionManager : ISlackConnectionManager
+    internal class SlackConnectionManager : ISlackConnectionManager
     {
         private readonly string botToken;
         private readonly ISlackRtmClient slackRtmClient;
