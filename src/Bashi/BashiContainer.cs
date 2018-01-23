@@ -48,12 +48,7 @@ namespace Bashi
             // Bashi.Log
             builder.RegisterModule(new BashiLoggerModule());
 
-            // Bashi.Config
-            var configFilepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Bashi.config");
-            builder.Register(c => new BashiConfigFile(configFilepath)).SingleInstance().AsImplementedInterfaces();
-            builder.RegisterType<EnvConfigParser>().SingleInstance().AsImplementedInterfaces();
-            builder.RegisterType<BashiConfigManager>().SingleInstance().AsImplementedInterfaces();
-            builder.Register(c => c.Resolve<IBashiConfigManager>().SlackConfigGroup).SingleInstance().AsImplementedInterfaces();
+            builder.RegisterModule(new BashiConfigModule());
 
             // Bashi
             builder.RegisterType<BashiApp>().SingleInstance().AsSelf();

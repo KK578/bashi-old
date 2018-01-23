@@ -1,10 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using Bashi.Config;
 using NUnit.Framework;
 
-namespace Bashi.Core.Test
+namespace Bashi.Config.Test
 {
     public class BashiConfigFileTest
     {
@@ -22,7 +21,7 @@ namespace Bashi.Core.Test
         [Test]
         public void ReadLines_ReadsDataFromFile()
         {
-            var result = subject.ReadLines().ToList();
+            var result = Enumerable.ToList<string>(subject.ReadLines());
 
             Assert.That(result.Count, Is.EqualTo(3));
             Assert.That(result[0], Is.EqualTo("A"));

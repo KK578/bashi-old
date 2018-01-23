@@ -3,7 +3,7 @@ using Bashi.Core.Interface.Config;
 
 namespace Bashi.Config
 {
-    public class EnvConfigParser : IEnvConfigParser
+    internal class EnvConfigParser : IEnvConfigParser
     {
         public IEnumerable<KeyValuePair<string, string>> Parse(IEnumerable<string> lines)
         {

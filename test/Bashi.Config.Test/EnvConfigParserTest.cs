@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Bashi.Config;
 using NUnit.Framework;
 
-namespace Bashi.Core.Test
+namespace Bashi.Config.Test
 {
     public class EnvConfigParserTest
     {

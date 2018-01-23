@@ -4,7 +4,7 @@ using Bashi.Core.Interface.Config;
 
 namespace Bashi.Config
 {
-    public class BashiConfigFile : IBashiConfigFile
+    internal class BashiConfigFile : IBashiConfigFile
     {
         private readonly string filepath;
 
