@@ -56,6 +56,7 @@
     <Compile Include="Interface\Rtm\IRtmResponseFactory.cs" />
     <Compile Include="Interface\Rtm\ISlackRtmClient.cs" />
     <Compile Include="Interface\Rtm\ISlackRtmEventPublisher.cs" />
+    <Compile Include="Interface\Rtm\IWebSocketManager.cs" />
     <Compile Include="Interface\Web\ISlackWebClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

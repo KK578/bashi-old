@@ -16,8 +16,9 @@ namespace SlackApi.Rtm
 
             builder.RegisterType<RtmRequestFactory>().SingleInstance().AsImplementedInterfaces();
             builder.RegisterType<RtmResponseFactory>().SingleInstance().AsImplementedInterfaces();
-            builder.RegisterType<SlackRtmEventPublisher>().SingleInstance().AsImplementedInterfaces();
             builder.RegisterType<SlackRtmClient>().SingleInstance().AsImplementedInterfaces();
+            builder.RegisterType<SlackRtmEventPublisher>().SingleInstance().AsImplementedInterfaces();
+            builder.RegisterType<WebSocketManager>().SingleInstance().AsImplementedInterfaces();
         }
     }
 }
