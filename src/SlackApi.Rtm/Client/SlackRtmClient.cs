@@ -3,6 +3,7 @@ using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Bashi.Core.Interface.Config.Group;
 using Bashi.Core.Interface.Log;
+using SlackApi.Core.Interface;
 using SlackApi.Core.Interface.Rtm;
 
 namespace SlackApi.Rtm.Client
@@ -14,6 +15,7 @@ namespace SlackApi.Rtm.Client
         private readonly IRtmRequestFactory rtmRequestFactory;
         private readonly IRtmResponseFactory rtmResponseFactory;
         private readonly ISlackRtmEventPublisher slackRtmEventPublisher;
+        private readonly ISlackConnectionEventPublisher slackConnectionEventPublisher;
         private readonly IBashiLogger log;
 
         public SlackRtmClient(IWebSocketManager webSocketManager,
@@ -21,6 +23,7 @@ namespace SlackApi.Rtm.Client
                               IRtmRequestFactory rtmRequestFactory,
                               IRtmResponseFactory rtmResponseFactory,
                               ISlackRtmEventPublisher slackRtmEventPublisher,
+                              ISlackConnectionEventPublisher slackConnectionEventPublisher,
                               IBashiLogger log)
         {
             pingTimeout = slackConfigGroup.PingTimeout;
@@ -28,6 +31,7 @@ namespace SlackApi.Rtm.Client
             this.rtmRequestFactory = rtmRequestFactory;
             this.rtmResponseFactory = rtmResponseFactory;
             this.slackRtmEventPublisher = slackRtmEventPublisher;
+            this.slackConnectionEventPublisher = slackConnectionEventPublisher;
             this.log = log;
         }
 
@@ -45,23 +49,30 @@ namespace SlackApi.Rtm.Client
 
             async void Setup()
             {
-                while (webSocketManager.State == WebSocketState.Open)
+                try
                 {
-                    var json = await webSocketManager.ReceiveData();
+                    while (webSocketManager.State == WebSocketState.Open)
+                    {
+                        var json = await webSocketManager.ReceiveData();
 
-                    try
-                    {
-                        var response = rtmResponseFactory.CreateResponse(json);
-                        slackRtmEventPublisher.Fire(response);
+                        try
+                        {
+                            var response = rtmResponseFactory.CreateResponse(json);
+                            slackRtmEventPublisher.Fire(response);
+                        }
+                        catch (NotImplementedException e)
+                        {
+                            log.Error(e.Message);
+                        }
+                        finally
+                        {
+                            log.Debug(json);
+                        }
                     }
-                    catch (NotImplementedException e)
-                    {
-                        log.Error(e.Message);
-                    }
-                    finally
-                    {
-                        log.Debug(json);
-                    }
+                }
+                catch (Exception ex)
+                {
+                    slackConnectionEventPublisher.RaiseRtmDisconnected();
                 }
             }
         }
@@ -72,12 +83,18 @@ namespace SlackApi.Rtm.Client
 
             async Task Setup()
             {
-                while (webSocketManager.State == WebSocketState.Open)
+                try
                 {
-                    var pingRequest = rtmRequestFactory.CreatePingRequest();
-
-                    await webSocketManager.SendData(pingRequest.ToJsonString());
-                    await Task.Delay(pingTimeout);
+                    while (webSocketManager.State == WebSocketState.Open)
+                    {
+                        var pingRequest = rtmRequestFactory.CreatePingRequest();
+                        await webSocketManager.SendData(pingRequest.ToJsonString());
+                        await Task.Delay(pingTimeout);
+                    }
+                }
+                catch
+                {
+                    // Ignored
                 }
             }
         }

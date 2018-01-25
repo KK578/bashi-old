@@ -2,6 +2,7 @@
 using Bashi.Core.Interface.Config.Group;
 using Bashi.Core.Interface.Connection;
 using Bashi.Core.Interface.Log;
+using SlackApi.Core.Interface;
 using SlackApi.Core.Interface.Rtm;
 using SlackApi.Core.Interface.Web;
 
@@ -17,12 +18,15 @@ namespace Bashi.Slack.Connection
         public SlackConnectionManager(ISlackConfigGroup slackConfigGroup,
                                       ISlackRtmClient slackRtmClient,
                                       ISlackWebClient slackWebClient,
+                                      ISlackConnectionEventPublisher slackConnectionEventPublisher,
                                       IBashiLogger log)
         {
             botToken = slackConfigGroup.BotToken;
             this.slackRtmClient = slackRtmClient;
             this.slackWebClient = slackWebClient;
             this.log = log;
+
+            slackConnectionEventPublisher.RtmDisconnected += (s, e) => Connect();
         }
 
         public void Connect()

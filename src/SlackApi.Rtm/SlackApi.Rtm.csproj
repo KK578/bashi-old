@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Client\SlackRtmClient.cs" />
     <Compile Include="Client\WebSocketManager.cs" />
+    <Compile Include="Events\SlackConnectionEventPublisher.cs" />
     <Compile Include="Events\SlackRtmEventPublisher.cs" />
     <Compile Include="Factory\RtmRequestFactory.cs" />
     <Compile Include="Factory\RtmResponseFactory.cs" />
