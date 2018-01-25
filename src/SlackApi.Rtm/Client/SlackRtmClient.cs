@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Net.WebSockets;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using Bashi.Core.Interface.Config.Group;
 using Bashi.Core.Interface.Log;
@@ -12,18 +10,15 @@ namespace SlackApi.Rtm.Client
 {
     internal class SlackRtmClient : ISlackRtmClient
     {
-        private const int BufferSize = 1024;
-
-        private readonly ClientWebSocket clientWebSocket;
         private readonly int pingTimeout;
+        private readonly IWebSocketManager webSocketManager;
         private readonly IRtmRequestFactory rtmRequestFactory;
         private readonly IRtmResponseFactory rtmResponseFactory;
         private readonly ISlackRtmEventPublisher slackRtmEventPublisher;
         private readonly ISlackConnectionEventPublisher slackConnectionEventPublisher;
         private readonly IBashiLogger log;
-        private readonly UTF8Encoding encoder;
 
-        public SlackRtmClient(ClientWebSocket clientWebSocket,
+        public SlackRtmClient(IWebSocketManager webSocketManager,
                               ISlackConfigGroup slackConfigGroup,
                               IRtmRequestFactory rtmRequestFactory,
                               IRtmResponseFactory rtmResponseFactory,
@@ -31,19 +26,18 @@ namespace SlackApi.Rtm.Client
                               ISlackConnectionEventPublisher slackConnectionEventPublisher,
                               IBashiLogger log)
         {
-            this.clientWebSocket = clientWebSocket;
             pingTimeout = slackConfigGroup.PingTimeout;
+            this.webSocketManager = webSocketManager;
             this.rtmRequestFactory = rtmRequestFactory;
             this.rtmResponseFactory = rtmResponseFactory;
             this.slackRtmEventPublisher = slackRtmEventPublisher;
             this.slackConnectionEventPublisher = slackConnectionEventPublisher;
             this.log = log;
-            encoder = new UTF8Encoding();
         }
 
         public async Task ConnectAsync(string url)
         {
-            await clientWebSocket.ConnectAsync(new Uri(url), CancellationToken.None);
+            await webSocketManager.ConnectAsync(new Uri(url));
 
             SetupReceiver();
             SetupPing();
@@ -57,9 +51,9 @@ namespace SlackApi.Rtm.Client
             {
                 try
                 {
-                    while (clientWebSocket.State == WebSocketState.Open)
+                    while (webSocketManager.State == WebSocketState.Open)
                     {
-                        var json = await SendRequest();
+                        var json = await webSocketManager.ReceiveData();
 
                         try
                         {
@@ -81,16 +75,6 @@ namespace SlackApi.Rtm.Client
                     slackConnectionEventPublisher.RaiseRtmDisconnected();
                 }
             }
-
-            async Task<string> SendRequest()
-            {
-                var buffer = new byte[BufferSize];
-                var arraySegment = new ArraySegment<byte>(buffer);
-                await clientWebSocket.ReceiveAsync(arraySegment, CancellationToken.None);
-                var json = encoder.GetString(buffer);
-
-                return json;
-            }
         }
 
         private void SetupPing()
@@ -101,10 +85,10 @@ namespace SlackApi.Rtm.Client
             {
                 try
                 {
-                    while (clientWebSocket.State == WebSocketState.Open)
+                    while (webSocketManager.State == WebSocketState.Open)
                     {
-                        await SendRequest();
-
+                        var pingRequest = rtmRequestFactory.CreatePingRequest();
+                        await webSocketManager.SendData(pingRequest.ToJsonString());
                         await Task.Delay(pingTimeout);
                     }
                 }
@@ -112,14 +96,6 @@ namespace SlackApi.Rtm.Client
                 {
                     // Ignored
                 }
-            }
-
-            async Task SendRequest()
-            {
-                var pingRequest = rtmRequestFactory.CreatePingRequest();
-                var buffer = Encoding.ASCII.GetBytes(pingRequest.ToJsonString());
-                var message = new ArraySegment<byte>(buffer);
-                await clientWebSocket.SendAsync(message, WebSocketMessageType.Text, true, CancellationToken.None);
             }
         }
     }
