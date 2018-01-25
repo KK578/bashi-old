@@ -52,6 +52,7 @@
     <Compile Include="Data\Message\Rtm\Response\Rtm\UserTypingResponse.cs" />
     <Compile Include="Data\Message\Web\Response\Rtm\RtmConnectResponse.cs" />
     <Compile Include="Events\Rtm\RtmMessageEventArgs.cs" />
+    <Compile Include="Interface\ISlackConnectionEventPublisher.cs" />
     <Compile Include="Interface\Rtm\IRtmRequestFactory.cs" />
     <Compile Include="Interface\Rtm\IRtmResponseFactory.cs" />
     <Compile Include="Interface\Rtm\ISlackRtmClient.cs" />
