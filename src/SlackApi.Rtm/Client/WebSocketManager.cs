@@ -11,12 +11,12 @@ namespace SlackApi.Rtm.Client
     {
         private const int BufferSize = 1024;
 
-        private readonly ClientWebSocket clientWebSocket;
+        private readonly IClientWebSocket clientWebSocket;
         private readonly UTF8Encoding encoder;
 
         public WebSocketState State => clientWebSocket.State;
 
-        public WebSocketManager(ClientWebSocket clientWebSocket)
+        public WebSocketManager(IClientWebSocket clientWebSocket)
         {
             this.clientWebSocket = clientWebSocket;
             this.encoder = new UTF8Encoding();

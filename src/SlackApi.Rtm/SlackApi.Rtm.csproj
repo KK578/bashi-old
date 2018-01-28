@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\ClientWebSocket.cs" />
     <Compile Include="Client\SlackRtmClient.cs" />
     <Compile Include="Client\WebSocketManager.cs" />
     <Compile Include="Events\SlackConnectionEventPublisher.cs" />

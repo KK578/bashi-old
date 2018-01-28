@@ -1,5 +1,4 @@
-﻿using System.Net.WebSockets;
-using Autofac;
+﻿using Autofac;
 using SlackApi.Rtm.Client;
 using SlackApi.Rtm.Events;
 using SlackApi.Rtm.Factory;

@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\WebSocketManagerTest.cs" />
     <Compile Include="Events\SlackRtmEventPublisherTest.cs" />
     <Compile Include="Factory\RtmResponseFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
