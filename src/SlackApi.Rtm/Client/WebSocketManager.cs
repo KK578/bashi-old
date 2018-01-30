@@ -30,6 +30,12 @@ namespace SlackApi.Rtm.Client
             await clientWebSocket.ReceiveAsync(arraySegment, CancellationToken.None);
 
             var result = encoder.GetString(buffer);
+            var endIndex = result.IndexOf('\0');
+
+            if (endIndex > 0 && endIndex < result.Length)
+            {
+                result = result.Substring(0, endIndex);
+            }
 
             return result;
         }

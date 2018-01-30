@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
 using Autofac.Extras.Moq;
@@ -11,6 +13,45 @@ namespace SlackApi.Rtm.Test.Client
 {
     public class WebSocketManagerTest
     {
+        private class TestableClientWebSocket : IClientWebSocket
+        {
+            private readonly byte[] byteArray;
+
+            public TestableClientWebSocket(byte[] byteArray)
+            {
+                this.byteArray = byteArray;
+            }
+
+            public WebSocketState State { get; }
+            
+            public async Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> arraySegment, CancellationToken cancellationToken)
+            {
+                var array = arraySegment.Array;
+
+                for (int i = 0; i < byteArray.Length; i++)
+                {
+                    array[i] = byteArray[i];
+                }
+
+                await Task.Delay(0);
+                
+                return null;
+            }
+
+            public Task SendAsync(ArraySegment<byte> buffer,
+                                  WebSocketMessageType messageType,
+                                  bool endOfMessage,
+                                  CancellationToken cancellationToken)
+            {
+                throw new NotImplementedException();
+            }
+
+            public Task ConnectAsync(Uri uri, CancellationToken cancellationToken)
+            {
+                throw new NotImplementedException();
+            }
+        }
+        
         private WebSocketManager subject;
 
         [Test]
@@ -31,34 +72,38 @@ namespace SlackApi.Rtm.Test.Client
         }
 
         [Test]
-        public async Task ReceiveData_ReturnsResultFromBuffer()
+        [TestCase("Hello", false)]
+        [TestCase("Hello", true)]
+        public void ReceiveData_ReturnsResultFromBuffer(string message, bool shouldFillArrayWithNullCharacter)
         {
             using (var mock = AutoMock.GetLoose())
             {
-                mock.Mock<IClientWebSocket>()
-                    .Setup(x => x.ReceiveAsync(It.IsAny<ArraySegment<byte>>(), It.IsAny<CancellationToken>()))
-                    .Callback<ArraySegment<byte>, CancellationToken>((buffer, token) =>
-                                                                     {
-                                                                         buffer.Array[0] = (byte)'H';
-                                                                         buffer.Array[1] = (byte)'e';
-                                                                         buffer.Array[2] = (byte)'l';
-                                                                         buffer.Array[3] = (byte)'l';
-                                                                         buffer.Array[4] = (byte)'o';
-
-                                                                         for (var i = 5; i < 1024; i++)
-                                                                         {
-                                                                             buffer.Array[i] = (byte)' ';
-                                                                         }
-                                                                     });
+                var byteArray = ToByteArray(message, shouldFillArrayWithNullCharacter);
+                var clientWebSocket = new TestableClientWebSocket(byteArray); 
+                mock.Provide<IClientWebSocket>(clientWebSocket);
                 subject = mock.Create<WebSocketManager>();
 
-                var result = await subject.ReceiveData();
+                var task = subject.ReceiveData();
+                task.Wait();
+                var result = task.Result;
 
                 Assert.That(result, Is.EqualTo("Hello"));
+            }
+        }
 
-                mock.Mock<IClientWebSocket>()
-                    .Verify(x => x.ReceiveAsync(It.IsAny<ArraySegment<byte>>(), It.IsAny<CancellationToken>()),
-                            Times.Once);
+        private static byte[] ToByteArray(string message, bool shouldFillArrayWithNullCharacter)
+        {
+            var array = message.ToCharArray().Select(c => (byte)c).ToArray();
+
+            if (shouldFillArrayWithNullCharacter)
+            {
+                var maxSizeArray = new byte[1024];
+                array.CopyTo(maxSizeArray, 0);
+                return maxSizeArray;
+            }
+            else
+            {
+                return array;
             }
         }
     }
