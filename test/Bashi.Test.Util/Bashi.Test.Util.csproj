@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{306FB045-4F94-4182-A35F-AB36250E02C4}</ProjectGuid>
+    <ProjectGuid>{94F70F70-B495-4058-A90A-336BB50769CE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SlackApi.Rtm.Test</RootNamespace>
-    <AssemblyName>SlackApi.Rtm.Test</AssemblyName>
+    <RootNamespace>Bashi.Test.Util</RootNamespace>
+    <AssemblyName>Bashi.Test.Util</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,51 +32,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.0.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da">
-      <HintPath>..\..\packages\Autofac.4.0.1\lib\net45\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="Autofac.Extras.Moq, Version=4.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da">
-      <HintPath>..\..\packages\Autofac.Extras.Moq.4.2.0\lib\net45\Autofac.Extras.Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc">
-      <HintPath>..\..\packages\Castle.Core.4.0.0\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Moq, Version=4.7.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920">
-      <HintPath>..\..\packages\Moq.4.7.0\lib\net45\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.9.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb">
-      <HintPath>..\..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\WebSocketManagerTest.cs" />
-    <Compile Include="Events\SlackRtmEventPublisherTest.cs" />
-    <Compile Include="Factory\RtmResponseFactoryTest.cs" />
+    <Compile Include="Mock\BashiMock.cs" />
+    <Compile Include="Mock\SlackApi\MockClientWebSocket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\SlackApi.Core\SlackApi.Core.csproj">
       <Project>{F432F154-E8EB-418C-88B8-6967483E8F6D}</Project>
       <Name>SlackApi.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\SlackApi.Rtm\SlackApi.Rtm.csproj">
-      <Project>{8A0FF980-FD28-44AD-9786-23A3BE66F2B9}</Project>
-      <Name>SlackApi.Rtm</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bashi.Test.Util\Bashi.Test.Util.csproj">
-      <Project>{94F70F70-B495-4058-A90A-336BB50769CE}</Project>
-      <Name>Bashi.Test.Util</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.
     <Target Name="BeforeBuild">
     </Target>
