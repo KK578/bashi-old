@@ -26,7 +26,7 @@ namespace SlackApi.Rtm.Test.Client
         }
 
         [Test]
-        public async Task ConnectAsync_ConnectsToUnderlyingWebSocket()
+        public async Task ConnectAsync_CallsConnectAsyncToUnderlyingWebSocket()
         {
             await subject.ConnectAsync(new Uri("http://localhost"));
 
@@ -34,7 +34,7 @@ namespace SlackApi.Rtm.Test.Client
         }
 
         [Test]
-        public async Task ReceiveData_ReceivesFromUnderlyingWebSocket()
+        public async Task ReceiveData_CallsReceiveAsyncToUnderlyingWebSocket()
         {
             await subject.ReceiveData();
 
@@ -51,6 +51,22 @@ namespace SlackApi.Rtm.Test.Client
             var result = await subject.ReceiveData();
 
             Assert.That(result, Is.EqualTo("Hello"));
+        }
+
+        [Test]
+        public async Task SendData_CallsSendAsyncToUnderlyingWebSocket()
+        {
+            await subject.SendData("");
+
+            Assert.That(clientWebSocket.WasMethodCalled(nameof(clientWebSocket.SendAsync)), Is.True);
+        }
+
+        [Test]
+        public async Task SendData_SendsMessageToUnderlyingWebSocket()
+        {
+            await subject.SendData("Testing");
+
+            Assert.That(clientWebSocket.LastMessage, Is.EqualTo("Testing"));
         }
 
         private static byte[] ToByteArray(string message, bool shouldFillArrayWithNullCharacter)
