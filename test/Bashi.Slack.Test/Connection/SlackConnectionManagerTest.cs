@@ -35,14 +35,14 @@ namespace Bashi.Slack.Test.Connection
         public void Connect_GivenEmptyStringShouldFail()
         {
             SetUp("");
-            Assert.Throws<Exception>(() => subject.Connect());
+            Assert.ThrowsAsync<Exception>(async () => await subject.ConnectAsync());
         }
 
         [Test]
         public void Connect_ShouldAttemptAConnection()
         {
             SetUp("http://localhost");
-            subject.Connect();
+            subject.ConnectAsync();
         }
     }
 }

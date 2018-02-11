@@ -1,7 +1,9 @@
-﻿namespace Bashi.Core.Interface.Connection
+﻿using System.Threading.Tasks;
+
+namespace Bashi.Core.Interface.Connection
 {
     public interface IConnectionManager
     {
-        void Connect();
+        Task ConnectAsync();
     }
 }

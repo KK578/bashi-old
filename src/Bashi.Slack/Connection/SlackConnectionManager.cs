@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Bashi.Core.Interface.Config.Group;
 using Bashi.Core.Interface.Connection;
 using Bashi.Core.Interface.Log;
@@ -26,15 +27,15 @@ namespace Bashi.Slack.Connection
             this.slackWebClient = slackWebClient;
             this.log = log;
 
-            slackConnectionEventPublisher.RtmDisconnected += (s, e) => Connect();
+            slackConnectionEventPublisher.RtmDisconnected += async (s, e) => await ConnectAsync();
         }
 
-        public void Connect()
+        public Task ConnectAsync()
         {
-            SetupRtmClient();
+            return SetupRtmClient();
         }
 
-        private async void SetupRtmClient()
+        private async Task SetupRtmClient()
         {
             var connectResponse = await slackWebClient.RtmConnectAsync(botToken);
 
