@@ -60,9 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BashiConfigFileTest.cs" />
-    <Compile Include="BashiConfigManagerTest.cs" />
-    <Compile Include="EnvConfigParserTest.cs" />
+    <Compile Include="File\BashiConfigFileTest.cs" />
+    <Compile Include="File\BashiConfigManagerTest.cs" />
+    <Compile Include="Parser\EnvConfigParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

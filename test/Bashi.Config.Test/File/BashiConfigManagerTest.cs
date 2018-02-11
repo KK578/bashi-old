@@ -6,7 +6,7 @@ using Bashi.Core.Interface.Config;
 using Moq;
 using NUnit.Framework;
 
-namespace Bashi.Config.Test
+namespace Bashi.Config.Test.File
 {
     public class BashiConfigManagerTest
     {

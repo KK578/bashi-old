@@ -1,34 +1,38 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Bashi.Core.Interface.Config;
+using Bashi.Core.Interface.Log;
 
 namespace Bashi.Config.Parser
 {
     internal class EnvConfigParser : IEnvConfigParser
     {
+        private readonly IBashiLogger log;
+
+        public EnvConfigParser(IBashiLogger log)
+        {
+            this.log = log;
+        }
+
         public IEnumerable<KeyValuePair<string, string>> Parse(IEnumerable<string> lines)
         {
-            foreach (var line in lines)
+            var filteredLines = lines.Select(line => line.Trim())
+                                     .Where(line => !string.IsNullOrWhiteSpace(line))
+                                     .Where(line => !IsComment(line));
+
+            foreach (var line in filteredLines)
             {
-                if (string.IsNullOrWhiteSpace(line))
+                if (line.Contains('='))
                 {
-                    continue;
-                }
-
-                var trimmed = line.Trim();
-
-                if (IsComment(trimmed))
-                {
-                    continue;
-                }
-
-                var index = trimmed.IndexOf('=');
-
-                if (index >= 0 || index == trimmed.Length - 1)
-                {
-                    var key = trimmed.Substring(0, index).Trim();
-                    var value = trimmed.Substring(index + 1).Trim();
+                    var index = line.IndexOf('=');
+                    var key = line.Substring(0, index).Trim();
+                    var value = line.Substring(index + 1).Trim();
 
                     yield return new KeyValuePair<string, string>(key, value);
+                }
+                else
+                {
+                    log.Error($"Unset config line: {line}");
                 }
             }
         }

@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Autofac.Extras.Moq;
 using Bashi.Config.Parser;
 using NUnit.Framework;
 
-namespace Bashi.Config.Test
+namespace Bashi.Config.Test.Parser
 {
     public class EnvConfigParserTest
     {
@@ -12,7 +13,10 @@ namespace Bashi.Config.Test
         [SetUp]
         public void SetUp()
         {
-            subject = new EnvConfigParser();
+            using (var automock = AutoMock.GetLoose())
+            {
+                subject = automock.Create<EnvConfigParser>();
+            }
         }
 
         [Test]
@@ -46,10 +50,9 @@ namespace Bashi.Config.Test
         [Test]
         public void Parse_LineWithoutEquals_ReturnsNothing()
         {
-            foreach (var unused in subject.Parse(CreateInput()))
-            {
-                Assert.Fail();
-            }
+            var keyPairs = subject.Parse(CreateInput()).ToList();
+
+            Assert.That(keyPairs.Count, Is.EqualTo(0));
 
             IEnumerable<string> CreateInput()
             {

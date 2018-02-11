@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Autofac;
 using Autofac.Core;
 using Bashi.Core.Interface.Log;
 using Bashi.Log.Log;
@@ -6,7 +7,7 @@ using log4net;
 
 namespace Bashi.Log
 {
-    public class BashiLogModule : Autofac.Module
+    public class BashiLogModule : Module
     {
         protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry,
                                                               IComponentRegistration registration)
